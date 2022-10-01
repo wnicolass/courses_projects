@@ -1,7 +1,7 @@
 @import url("https://fonts.googleapis.com/css2?family=Lato:wght@400;700&display=swap");
 
 :root {
-  --modal-duration: 1s;
+  --modal-duration: 0.5s;
   --primary-color: #30336b;
   --secondary-color: #be2edd;
 
@@ -139,6 +139,10 @@ input[type="submit"] {
   bottom: 0;
 }
 
+.modal-container.show-modal {
+  display: block;
+}
+
 .modal {
   background-color: #fff;
   border-radius: 5px;
@@ -149,6 +153,7 @@ input[type="submit"] {
   left: 50%;
   transform: translate(-50%, -50%);
   width: min(100%, 400px);
+  animation: modalOpen var(--modal-duration);
 }
 
 .modal-header {
@@ -224,4 +229,14 @@ input[type="submit"] {
   position: absolute;
   top: 0;
   right: 0;
+}
+
+@keyframes modalOpen {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
 }
