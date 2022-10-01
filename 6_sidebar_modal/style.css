@@ -17,6 +17,12 @@
 body {
   font-family: "Lato", sans-serif;
   font-size: 1.6rem;
+  transition: transform 0.3s ease;
+  overflow-x: hidden;
+}
+
+body.show-nav {
+  transform: translateX(200px);
 }
 
 nav {
@@ -125,7 +131,7 @@ input[type="submit"] {
 
 .modal-container {
   background-color: rgba(0, 0, 0, 0.6);
-  /* display: none; */
+  display: none;
   position: fixed;
   top: 0;
   left: 0;
@@ -157,6 +163,17 @@ input[type="submit"] {
 
 .modal-content {
   padding: 2rem;
+}
+
+.modal form > input {
+  text-transform: uppercase;
+  letter-spacing: 0.2rem;
+  font-family: inherit;
+  font-weight: 700;
+}
+
+.modal form > input:active {
+  transform: scale(0.98);
 }
 
 .modal-form div {
