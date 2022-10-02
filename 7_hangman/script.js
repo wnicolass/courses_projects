@@ -20,7 +20,7 @@ const words = [
 let selectedWord = words[Math.floor(Math.random() * words.length)];
 
 const correctLetters = [];
-const wrongLettrs = [];
+const wrongLetters = [];
 
 function displayWord() {
   wordEl.innerHTML = `
@@ -43,7 +43,27 @@ function displayWord() {
   }
 }
 
-function updateWrongLettersEl() {}
+function updateWrongLettersEl() {
+  wrongLettersEl.innerHTML = `
+        ${wrongLetters.length > 0 ? "<p>wrong</p>" : ""}
+        ${wrongLetters.map((letter) => `<span>${letter}</span>`)}
+    `;
+
+  figureParts.forEach((part, index) => {
+    const errors = wrongLetters.length;
+
+    if (index < errors) {
+      part.style.display = "block";
+    } else {
+      part.style.display = "none";
+    }
+  });
+
+  if (wrongLetters.length === figureParts.length) {
+    finalMessage.innerText = "Unfortunately you lost. 😕";
+    popup.style.display = "flex";
+  }
+}
 
 function showNotification() {
   notification.classList.add("show");
@@ -64,8 +84,8 @@ window.addEventListener("keydown", (e) => {
         showNotification();
       }
     } else {
-      if (!wrongLettrs.includes(letter)) {
-        wrongLettrs.push(letter);
+      if (!wrongLetters.includes(letter)) {
+        wrongLetters.push(letter);
 
         updateWrongLettersEl();
       } else {
@@ -73,6 +93,19 @@ window.addEventListener("keydown", (e) => {
       }
     }
   }
+});
+
+//restart game
+playAgainBtn.addEventListener("click", () => {
+  correctLetters.splice(0);
+  wrongLetters.splice(0);
+
+  selectedWord = words[Math.floor(Math.random() * words.length)];
+
+  displayWord();
+  updateWrongLettersEl();
+
+  popup.style.display = "none";
 });
 
 displayWord();
