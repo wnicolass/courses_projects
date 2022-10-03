@@ -45,8 +45,21 @@ button {
   margin: 0;
 }
 
+button {
+  transition: all 0.3s ease;
+}
+
+button:hover {
+  color: #fff;
+  background-color: purple;
+}
+
 input[type="text"] {
   width: 300px;
+}
+
+input[type="text"]:focus {
+  outline-color: purple;
 }
 
 .search-btn {
