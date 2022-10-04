@@ -128,7 +128,8 @@ input[type="text"]:focus {
 }
 
 .single-meal {
-  margin: 30px;
+  margin: 0 auto;
+  text-align: center;
   width: 70%;
 }
 
