@@ -44,6 +44,16 @@ function searchMeal(e) {
   }
 }
 
+function getMealByID(mealID) {
+  fetch(`https://www.themealdb.com/api/json/v1/1/lookup.php?i=${mealID}`)
+    .then((res) => res.json())
+    .then((data) => {
+      const meal = data.meals[0];
+
+      addMealToDOM(meal);
+    });
+}
+
 submit.addEventListener("submit", searchMeal);
 
 mealsEl.addEventListener("click", (e) => {
