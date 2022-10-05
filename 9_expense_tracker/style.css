@@ -97,6 +97,10 @@ input[type="number"] {
   width: 100%;
 }
 
+small {
+  color: #e74c3c;
+}
+
 .btn {
   cursor: pointer;
   background-color: #9c88ff;

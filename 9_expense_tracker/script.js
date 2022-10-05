@@ -5,6 +5,7 @@ const list = document.getElementById("list");
 const form = document.getElementById("form");
 const text = document.getElementById("text");
 const amount = document.getElementById("amount");
+const small = document.getElementById("error");
 
 const dummyTransactions = [
   { id: 1, text: "Flower", amount: -20 },
@@ -14,6 +15,21 @@ const dummyTransactions = [
 ];
 
 let transactions = dummyTransactions;
+
+function addTransaction(e) {
+  e.preventDefault();
+
+  if (text.value.trim() === "" || amount.value.trim() === "") {
+    small.innerText = `All fields must be filled`;
+    setTimeout(() => (small.innerText = ""), 5000);
+  } else {
+    const transaction = {};
+  }
+}
+
+function generateID() {
+  return Math.floor(Math.random() * 100000000);
+}
 
 function addTransactionDOM(transaction) {
   const sign = transaction.amount < 0 ? "-" : "+";
@@ -58,3 +74,5 @@ function init() {
 }
 
 init();
+
+form.addEventListener("submit", addTransaction);
