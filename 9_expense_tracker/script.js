@@ -16,16 +16,20 @@ let transactions =
 
 let count = 0;
 
+function updateLocalStorage() {
+  localStorage.setItem("transactions", JSON.stringify(transactions));
+}
+
 function addTransaction(e) {
   e.preventDefault();
-  count++;
+  const lastId = transactions[transactions.length - 1]?.id || 0;
 
   if (text.value.trim() === "" || amount.value.trim() === "") {
     small.innerText = `All fields must be filled`;
     setTimeout(() => (small.innerText = ""), 5000);
   } else {
     const transaction = {
-      id: count,
+      id: lastId + 1,
       text: text.value,
       amount: +amount.value,
     };
@@ -33,6 +37,7 @@ function addTransaction(e) {
     transactions.push(transaction);
     addTransactionDOM(transaction);
     updateValues();
+    updateLocalStorage();
 
     text.value = "";
     amount.value = "";
@@ -42,6 +47,7 @@ function addTransaction(e) {
 function removeTransaction(id) {
   transactions = transactions.filter((transaction) => transaction.id !== id);
 
+  updateLocalStorage();
   init();
 }
 
