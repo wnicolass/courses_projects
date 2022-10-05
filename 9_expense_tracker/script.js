@@ -15,20 +15,24 @@ const dummyTransactions = [
 ];
 
 let transactions = dummyTransactions;
+let count = 0;
 
 function addTransaction(e) {
   e.preventDefault();
+  count++;
 
   if (text.value.trim() === "" || amount.value.trim() === "") {
     small.innerText = `All fields must be filled`;
     setTimeout(() => (small.innerText = ""), 5000);
   } else {
-    const transaction = {};
-  }
-}
+    const transaction = {
+      id: count,
+      text: text.value,
+      amount: amount.value,
+    };
 
-function generateID() {
-  return Math.floor(Math.random() * 100000000);
+    console.log(transaction);
+  }
 }
 
 function addTransactionDOM(transaction) {
