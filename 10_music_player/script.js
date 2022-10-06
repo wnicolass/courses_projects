@@ -45,3 +45,17 @@ playBtn.addEventListener("click", () => {
     playSong();
   }
 });
+
+function prevSong() {
+  songIndex--;
+
+  if (songIndex < 0) {
+    songIndex = songIndex.length - 1;
+  }
+
+  loadSong(songs[songIndex]);
+  playSong();
+}
+
+prevBtn.addEventListener("click", prevSong);
+nextBtn.addEventListener("click", nextSong);
