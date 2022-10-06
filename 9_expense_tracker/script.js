@@ -14,8 +14,6 @@ const localStorageTransactions = JSON.parse(
 let transactions =
   localStorage.getItem("transactions") !== null ? localStorageTransactions : [];
 
-let count = 0;
-
 function updateLocalStorage() {
   localStorage.setItem("transactions", JSON.stringify(transactions));
 }
