@@ -19,6 +19,8 @@ function loadSong(song) {
   cover.src = `./images/${song}.png`;
 }
 
+loadSong(songs[songIndex]);
+
 function playSong() {
   musicContainer.classList.add("play");
   playBtn.querySelector("i.fas").classList.remove("fa-play");
@@ -34,17 +36,6 @@ function pauseSong() {
 
   audio.pause();
 }
-
-loadSong(songs[songIndex]);
-playBtn.addEventListener("click", () => {
-  const isPlaying = musicContainer.classList.contains("play");
-
-  if (isPlaying) {
-    pauseSong();
-  } else {
-    playSong();
-  }
-});
 
 function prevSong() {
   songIndex--;
@@ -81,6 +72,16 @@ function setProgress(e) {
 
   audio.currentTime = (clickX / progressBarWidth) * duration;
 }
+
+playBtn.addEventListener("click", () => {
+  const isPlaying = musicContainer.classList.contains("play");
+
+  if (isPlaying) {
+    pauseSong();
+  } else {
+    playSong();
+  }
+});
 
 prevBtn.addEventListener("click", prevSong);
 nextBtn.addEventListener("click", nextSong);
