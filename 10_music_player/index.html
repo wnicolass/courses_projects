@@ -15,6 +15,32 @@
     <title>Music Player</title>
   </head>
   <body>
+    <h1>Music Player</h1>
+
+    <div class="music-container" id="music-container">
+      <div class="music-info">
+        <h4 id="title"></h4>
+        <div class="progress-container" id="progress-container">
+          <div class="progress" id="progress"></div>
+        </div>
+      </div>
+
+      <audio src="./music/high_enough.mp3" id="audio"></audio>
+      <div class="img-container">
+        <img id="cover" src="./images/high_enough.png" alt="music-cover" />
+      </div>
+      <div class="navigation">
+        <button id="prev" class="action-btn">
+          <i class="fas fa-backward"></i>
+        </button>
+        <button id="prev" class="action-btn action-btn-big">
+          <i class="fas fa-play"></i>
+        </button>
+        <button id="next" class="action-btn">
+          <i class="fas fa-forward"></i>
+        </button>
+      </div>
+    </div>
     <script src="./script.js"></script>
   </body>
 </html>
