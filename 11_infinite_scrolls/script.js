@@ -4,6 +4,7 @@ const filter = document.getElementById("filter");
 
 let limit = 5;
 let page = 1;
+let isLoading = false;
 
 async function getPosts() {
   const res = await fetch(
@@ -33,16 +34,19 @@ async function showPosts() {
   });
 }
 
-function showLoading() {
+async function showLoading() {
+  if (isLoading) {
+    return;
+  }
+
+  page++;
+  isLoading = true;
   loading.classList.add("show");
 
   setTimeout(() => {
+    showPosts();
     loading.classList.remove("show");
-
-    setTimeout(() => {
-      page++;
-      showPosts();
-    }, 300);
+    isLoading = false;
   }, 1000);
 }
 
