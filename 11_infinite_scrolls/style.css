@@ -89,7 +89,7 @@ h1 {
 }
 
 .loader {
-  /* opacity: 0; */
+  opacity: 0;
   display: flex;
 
   position: fixed;
