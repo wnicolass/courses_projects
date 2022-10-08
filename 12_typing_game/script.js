@@ -11,6 +11,7 @@ const difficultySelect = document.getElementById("difficulty");
 let score = 0;
 let time = 10;
 let randomWord;
+let difficulty = "easy";
 
 function rand(min, max) {
   return Math.floor(Math.random() * (max - min)) + min;
@@ -69,4 +70,11 @@ text.addEventListener("input", (e) => {
 
     updateTime();
   }
+});
+
+settingsBtn.addEventListener("click", () => settings.classList.toggle("hide"));
+settingsForm.addEventListener("change", (e) => {
+  difficulty = e.target.value;
+
+  localStorage.setItem("difficulty", difficulty);
 });
