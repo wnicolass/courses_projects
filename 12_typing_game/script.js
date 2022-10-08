@@ -67,7 +67,7 @@ function updateScore() {
 text.addEventListener("input", (e) => {
   const insertedText = e.target.value;
 
-  if (insertedText.length === 1) startTimer = true;
+  if (insertedText.length === 1 && !startTimer) startTimer = true;
 
   if (insertedText === randomWord) {
     updateScore();
