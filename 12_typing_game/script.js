@@ -17,6 +17,7 @@ let difficulty =
     : "easy";
 
 difficultySelect.value = difficulty;
+let startTimer = false;
 
 function rand(min, max) {
   return Math.floor(Math.random() * (max - min)) + min;
@@ -35,6 +36,7 @@ async function fetchWords() {
 fetchWords();
 
 function updateTime() {
+  if (!startTimer) return;
   time--;
   timeEl.innerHTML = time + "s";
 
@@ -64,6 +66,7 @@ function updateScore() {
 
 text.addEventListener("input", (e) => {
   const insertedText = e.target.value;
+  insertedText.length === 1 ? (startTimer = true) : false;
 
   console.log(insertedText, randomWord);
   if (insertedText === randomWord) {
