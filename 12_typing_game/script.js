@@ -69,7 +69,6 @@ text.addEventListener("input", (e) => {
 
   if (insertedText.length === 1) startTimer = true;
 
-  console.log(insertedText, randomWord);
   if (insertedText === randomWord) {
     updateScore();
     fetchWords();
