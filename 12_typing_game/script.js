@@ -11,7 +11,12 @@ const difficultySelect = document.getElementById("difficulty");
 let score = 0;
 let time = 10;
 let randomWord;
-let difficulty = "easy";
+let difficulty =
+  localStorage.getItem("difficulty") !== null
+    ? localStorage.getItem("difficulty")
+    : "easy";
+
+difficultySelect.value = difficulty;
 
 function rand(min, max) {
   return Math.floor(Math.random() * (max - min)) + min;
