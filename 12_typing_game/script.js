@@ -25,7 +25,7 @@ function rand(min, max) {
 
 async function fetchWords() {
   const res = await fetch(
-    "https://random-word-api.herokuapp.com/word?length=5"
+    `https://random-word-api.herokuapp.com/word?length=${rand(3, 8)}`
   );
   const data = await res.json();
 
@@ -34,6 +34,16 @@ async function fetchWords() {
 }
 
 fetchWords();
+
+function gameOver() {
+  endgameEl.innerHTML = `
+          <h1>Time ran out 🕛</h1>
+          <p>Your final score is ${score}</p>
+          <button onclick="location.reload()">Play Again</button>
+      `;
+
+  endgameEl.style.display = "flex";
+}
 
 function updateTime() {
   if (!startTimer) return;
@@ -45,16 +55,6 @@ function updateTime() {
 
     gameOver();
   }
-}
-
-function gameOver() {
-  endgameEl.innerHTML = `
-        <h1>Time ran out 🕛</h1>
-        <p>Your final score is ${score}</p>
-        <button onclick="location.reload()">Play Again</button>
-    `;
-
-  endgameEl.style.display = "flex";
 }
 
 const timeInterval = setInterval(updateTime, 1000);
