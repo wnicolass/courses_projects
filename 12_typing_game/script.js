@@ -18,11 +18,11 @@ function rand(min, max) {
 
 async function fetchWords() {
   const res = await fetch(
-    "https://random-word-api.herokuapp.com/word?number=100"
+    "https://random-word-api.herokuapp.com/word?length=5"
   );
   const data = await res.json();
 
-  randomWord = data[rand(1, data.length)];
+  randomWord = String(data);
   word.innerHTML = randomWord;
 }
 
@@ -59,9 +59,14 @@ function updateScore() {
 text.addEventListener("input", (e) => {
   const insertedText = e.target.value;
 
+  console.log(insertedText, randomWord);
   if (insertedText === randomWord) {
-    fetchWords();
-    e.target.value = "";
     updateScore();
+    fetchWords();
+
+    e.target.value = "";
+    time += 5;
+
+    updateTime();
   }
 });
