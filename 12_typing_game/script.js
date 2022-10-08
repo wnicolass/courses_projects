@@ -9,16 +9,20 @@ const settingsForm = document.getElementById("settings-form");
 const difficultySelect = document.getElementById("difficulty");
 
 let score;
+let time;
 
 function rand(min, max) {
   return Math.floor(Math.random() * (max - min)) + min;
 }
 
 async function fetchWords() {
-  const res = await fetch("https://random-word-api.herokuapp.com/all");
+  const res = await fetch(
+    "https://random-word-api.herokuapp.com/word?number=100"
+  );
   const data = await res.json();
 
-  return data[rand(1, 178187)];
+  let randomWord = data[rand(1, data.length)];
+  word.innerHTML = randomWord;
 }
 
 fetchWords();
