@@ -9,7 +9,7 @@ const settingsForm = document.getElementById("settings-form");
 const difficultySelect = document.getElementById("difficulty");
 
 let score = 0;
-let time;
+let time = 10;
 let randomWord;
 
 function rand(min, max) {
@@ -27,6 +27,19 @@ async function fetchWords() {
 }
 
 fetchWords();
+
+function updateTime() {
+  time--;
+  timeEl.innerHTML = time + "s";
+
+  if (time === 0) {
+    clearInterval(timeInterval);
+
+    gameOver();
+  }
+}
+
+const timeInterval = setInterval(updateTime, 1000);
 
 function updateScore() {
   score++;
