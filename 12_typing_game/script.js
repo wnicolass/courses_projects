@@ -8,8 +8,9 @@ const settings = document.getElementById("settings");
 const settingsForm = document.getElementById("settings-form");
 const difficultySelect = document.getElementById("difficulty");
 
-let score;
+let score = 0;
 let time;
+let randomWord;
 
 function rand(min, max) {
   return Math.floor(Math.random() * (max - min)) + min;
@@ -21,8 +22,23 @@ async function fetchWords() {
   );
   const data = await res.json();
 
-  let randomWord = data[rand(1, data.length)];
+  randomWord = data[rand(1, data.length)];
   word.innerHTML = randomWord;
 }
 
 fetchWords();
+
+function updateScore() {
+  score++;
+  scoreEl.innerHTML = `${score}`;
+}
+
+text.addEventListener("input", (e) => {
+  const insertedText = e.target.value;
+
+  if (insertedText === randomWord) {
+    fetchWords();
+    e.target.value = "";
+    updateScore();
+  }
+});
