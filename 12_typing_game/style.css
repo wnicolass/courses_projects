@@ -127,6 +127,7 @@ select:focus {
   align-items: center;
   justify-content: center;
   flex-direction: column;
+  gap: 15px;
 
   position: absolute;
   top: 0;
