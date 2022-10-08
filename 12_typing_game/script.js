@@ -71,7 +71,14 @@ text.addEventListener("input", (e) => {
     fetchWords();
 
     e.target.value = "";
-    time += 5;
+
+    if (difficulty === "medium") {
+      time += 3;
+    } else if (difficulty === "hard") {
+      time += 2;
+    } else {
+      time += 5;
+    }
 
     updateTime();
   }
