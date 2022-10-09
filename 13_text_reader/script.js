@@ -71,7 +71,7 @@ function createBox(item) {
     speakText();
 
     box.classList.add("active");
-    setTimeout(() => box.classList.remove("active"), 1000);
+    setTimeout(() => box.classList.remove("active"), 1500);
   });
 
   main.appendChild(box);
@@ -102,9 +102,11 @@ function speakText() {
   speechSynthesis.speak(message);
 }
 
-speechSynthesis.addEventListener("voiceschanged", getVoices);
+function setVoice(e) {
+  message.voice = voices.find((voice) => voice.name === e.target.value);
+}
 
-data.forEach(createBox);
+speechSynthesis.addEventListener("voiceschanged", getVoices);
 
 toggleBtn.addEventListener("click", () =>
   document.getElementById("text-box").classList.toggle("show")
@@ -114,4 +116,7 @@ closeBtn.addEventListener("click", () =>
   document.getElementById("text-box").classList.remove("show")
 );
 
+voicesSelect.addEventListener("change", setVoice);
+
+data.forEach(createBox);
 getVoices();
