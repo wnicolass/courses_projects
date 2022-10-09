@@ -70,3 +70,7 @@ function createBox(item) {
 }
 
 data.forEach(createBox);
+
+toggleBtn.addEventListener("click", () =>
+  document.getElementById("text-box").classList.toggle("show")
+);
