@@ -32,7 +32,7 @@ h1 button {
   right: 0;
   z-index: 2;
 
-  transform: translate(120%, 50%);
+  transform: translate(120%, 30%);
 }
 
 .btn {
@@ -45,7 +45,6 @@ h1 button {
 
   font-size: 14px;
 
-  margin-top: 20px;
   padding: 10px 15px;
 }
 
