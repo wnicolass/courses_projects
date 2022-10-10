@@ -203,7 +203,29 @@ h1 button {
   transition: 0.3s ease;
 }
 
+.add-container h1 {
+  color: #000;
+}
+
 .add-container.show {
   opacity: 1;
   z-index: 2;
+}
+
+.add-container h3 {
+  margin: 10px 0;
+}
+
+.form-group label {
+  display: block;
+  margin: 20px 0 10px;
+}
+
+.form-group textarea {
+  border: 1px solid #aaa;
+  border-radius: 3px;
+  font-size: 16px;
+  padding: 12px;
+  min-width: 400px;
+  max-width: 100%;
 }
