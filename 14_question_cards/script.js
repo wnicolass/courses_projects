@@ -22,20 +22,9 @@ function getCardsData() {
 
 const cardsData = getCardsData();
 
-// const cardsData = [
-//   {
-//     question: "What must a variable begin with?",
-//     answer: "A letter, $ or _",
-//   },
-//   {
-//     question: "What is a variable?",
-//     answer: "Container for a piece of data",
-//   },
-//   {
-//     question: "Example of Case Sensitive Variable",
-//     answer: "thisIsAVariable",
-//   },
-// ];
+function updateCurrentText() {
+  currentEl.innerText = `${currentActiveCard + 1}/${cardsEl.length}`;
+}
 
 function createCard(data, index) {
   const card = document.createElement("div");
@@ -63,10 +52,6 @@ function createCard(data, index) {
   cardsContainer.appendChild(card);
 
   updateCurrentText();
-}
-
-function updateCurrentText() {
-  currentEl.innerText = `${currentActiveCard + 1}/${cardsEl.length}`;
 }
 
 function createCards() {
