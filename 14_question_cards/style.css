@@ -71,7 +71,7 @@ h1 button {
 
   height: 300px;
   width: 500px;
-  max-width: 100%;
+  max-width: 90%;
 }
 
 .card {
@@ -98,6 +98,10 @@ h1 button {
   transform: translateX(0) rotateY(0deg);
 }
 
+.card.left {
+  transform: translateX(-50%) rotateY(10deg);
+}
+
 .inner-card {
   box-shadow: 0 1px 10px rgba(255, 255, 255, 0.5);
   background-color: #fff;
@@ -108,10 +112,19 @@ h1 button {
   width: 100%;
 
   position: relative;
+
+  transform-style: preserve-3d;
+
+  transition: transform 0.4s ease;
+}
+
+.card.show-answer .inner-card {
+  transform: rotate(180deg);
 }
 
 .inner-card-front,
 .inner-card-back {
+  backface-visibility: hidden;
   position: absolute;
   top: 0;
   left: 0;
@@ -124,4 +137,28 @@ h1 button {
   width: 100%;
 
   background: #fff;
+}
+
+.inner-card-front {
+  transform: rotateX(0deg);
+  z-index: 2;
+}
+
+.inner-card-back {
+  transform: rotate(180deg);
+}
+
+.inner-card-front:after,
+.inner-card-back:after {
+  content: "\f021   Flip";
+  font-family: "Font Awesome 5 Free", Lato, sans-serif;
+  position: absolute;
+
+  top: 10px;
+  right: 10px;
+
+  font-weight: bold;
+  font-size: 16px;
+
+  color: #ccc;
 }
