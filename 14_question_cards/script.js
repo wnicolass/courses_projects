@@ -14,20 +14,28 @@ let currentActiveCard = 0;
 
 const cardsEl = [];
 
-const cardsData = [
-  {
-    question: "What must a variable begin with?",
-    answer: "A letter, $ or _",
-  },
-  {
-    question: "What is a variable?",
-    answer: "Container for a piece of data",
-  },
-  {
-    question: "Example of Case Sensitive Variable",
-    answer: "thisIsAVariable",
-  },
-];
+function getCardsData() {
+  const cards = JSON.parse(localStorage.getItem("cards"));
+
+  return cards === null ? [] : cards;
+}
+
+const cardsData = getCardsData();
+
+// const cardsData = [
+//   {
+//     question: "What must a variable begin with?",
+//     answer: "A letter, $ or _",
+//   },
+//   {
+//     question: "What is a variable?",
+//     answer: "Container for a piece of data",
+//   },
+//   {
+//     question: "Example of Case Sensitive Variable",
+//     answer: "thisIsAVariable",
+//   },
+// ];
 
 function createCard(data, index) {
   const card = document.createElement("div");
@@ -93,4 +101,32 @@ prevBtn.addEventListener("click", () => {
   cardsEl[currentActiveCard].className = "card active";
 
   updateCurrentText();
+});
+
+showBtn.addEventListener("click", () => addContainer.classList.add("show"));
+hideBtn.addEventListener("click", () => addContainer.classList.remove("show"));
+
+function setCardsData(cards) {
+  localStorage.setItem("cards", JSON.stringify(cards));
+  window.location.reload();
+}
+
+addCardBtn.addEventListener("click", () => {
+  const question = questionEl.value;
+  const answer = answerEl.value;
+
+  if (question.trim() && answer.trim()) {
+    const newCard = { question, answer };
+
+    createCard(newCard);
+
+    questionEl.value = "";
+    answerEl.value = "";
+
+    addContainer.classList.remove("show");
+
+    cardsData.push(newCard);
+
+    setCardsData(cardsData);
+  }
 });
