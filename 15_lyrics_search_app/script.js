@@ -5,6 +5,13 @@ const more = document.getElementById("more");
 
 const API_URL = "https://api.lyrics.ovh";
 
+async function getMoreSongs(url) {
+  const res = await fetch(`https://cors-anywhere.herokuapp.com/${url}`);
+  const data = await res.json();
+
+  showData(data);
+}
+
 function showData(songs) {
   result.innerHTML = `
     <ul class="songs">
