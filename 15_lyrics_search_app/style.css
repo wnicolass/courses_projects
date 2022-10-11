@@ -131,7 +131,7 @@ ul.songs li {
 
 .container {
   margin: 30px auto;
-  width: min(100%, 500px);
+  width: min(95%, 500px);
 }
 
 .container h2 {
