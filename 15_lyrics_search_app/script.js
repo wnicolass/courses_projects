@@ -19,7 +19,7 @@ function showData(songs) {
           .map(
             (song) => `<li>
         <span><strong>${song.artist.name}</strong> - ${song.title}</span>
-        <button class="btn" data-artist="${song.artist.name}" data-songtitle="${song.title}">Get Lyrics</button>
+        <button class="btn" data-id="${song.id}" data-artist="${song.artist.name}" data-songtitle="${song.title}">Get Lyrics</button>
     </li>`
           )
           .join("")}
@@ -44,6 +44,13 @@ function showData(songs) {
   }
 }
 
+// async function getLyrics(artist, songTitle) {
+//   const res = await fetch(`${API_URL}/v1/${artist}/${songTitle}`);
+//   const data = await res.json();
+
+//   console.log(data);
+// }
+
 async function searchSongs(term) {
   const res = await fetch(`${API_URL}/suggest/${term}`);
   const data = await res.json();
@@ -61,5 +68,17 @@ form.addEventListener("submit", (e) => {
     alert("Please type in a search term");
   } else {
     searchSongs(searchTerm);
+  }
+});
+
+result.addEventListener("click", (e) => {
+  const clickedEl = e.target;
+
+  if (clickedEl.tagName === "BUTTON") {
+    const artist = clickedEl.getAttribute("data-artist");
+    const songTitle = clickedEl.getAttribute("data-songtitle");
+
+    console.log(artist, songTitle);
+    getLyrics(artist, songTitle);
   }
 });
