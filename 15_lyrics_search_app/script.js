@@ -1,3 +1,5 @@
+//this project is on stand-by!!! the api isn't working due server issues.
+
 const form = document.getElementById("form");
 const search = document.getElementById("search");
 const result = document.getElementById("result");
