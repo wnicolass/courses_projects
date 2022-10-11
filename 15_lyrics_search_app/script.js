@@ -7,13 +7,6 @@ const more = document.getElementById("more");
 
 const API_URL = "https://api.lyrics.ovh";
 
-async function getMoreSongs(url) {
-  const res = await fetch(`https://cors-anywhere.herokuapp.com/${url}`);
-  const data = await res.json();
-
-  showData(data);
-}
-
 function showData(songs) {
   result.innerHTML = `
     <ul class="songs">
@@ -28,30 +21,33 @@ function showData(songs) {
     </ul>
   `;
 
-  if (songs.prev || songs.next) {
-    more.innerHTML = `
-        ${
-          songs.prev
-            ? `<button class="btn" onclick="getMoreSongs('${songs.prev}')">Prev</button>`
-            : ""
-        }
-        ${
-          songs.next
-            ? `<button class="btn" onclick="getMoreSongs('${songs.next}')">Next</button>`
-            : ""
-        }
-    `;
-  } else {
-    more.innerHTML = "";
-  }
+  more.innerHTML = "";
 }
 
-// async function getLyrics(artist, songTitle) {
-//   const res = await fetch(`${API_URL}/v1/${artist}/${songTitle}`);
-//   const data = await res.json();
+async function getSongInfo(term, target) {
+  const res = await fetch(`${API_URL}/suggest/${term}`);
+  const data = await res.json();
 
-//   console.log(data);
-// }
+  const resultsArr = [...data.data];
+  const songId = target.getAttribute("data-id");
+
+  let wantedInfo = resultsArr.find((result) => result.id === Number(songId));
+
+  result.innerHTML = `
+    <h2>${wantedInfo.title} - ${wantedInfo.artist.name}</h2>
+    <img class="picture" src="${wantedInfo.artist.picture_medium}" alt="${wantedInfo.artist.name}" />
+    <p>Hear this song by clicking <a href="${wantedInfo.link}" target="_blank">HERE</a></p>
+    <br>
+    <div>
+      <h3>Album: ${wantedInfo.album.title}</h3>
+      <img src="${wantedInfo.album.cover_medium}">
+    </div>
+  `;
+
+  more.innerHTML = `<button class="btn" onclick="searchSongs('${term}')">Back to results</button>`;
+
+  console.log(wantedInfo);
+}
 
 async function searchSongs(term) {
   const res = await fetch(`${API_URL}/suggest/${term}`);
@@ -77,10 +73,9 @@ result.addEventListener("click", (e) => {
   const clickedEl = e.target;
 
   if (clickedEl.tagName === "BUTTON") {
-    const artist = clickedEl.getAttribute("data-artist");
-    const songTitle = clickedEl.getAttribute("data-songtitle");
+    const term = search.value.trim();
+    const target = e.target;
 
-    console.log(artist, songTitle);
-    getLyrics(artist, songTitle);
+    getSongInfo(term, target);
   }
 });
