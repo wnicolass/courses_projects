@@ -131,15 +131,48 @@ ul.songs li {
 
 .container {
   margin: 30px auto;
-  width: min(95%, 500px);
+  width: min(95%, 700px);
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
 .container h2 {
   font-weight: 300;
 }
 
-.container p {
+.container img.picture {
   text-align: center;
+
+  width: 250px;
+  border-radius: 50%;
+  border: 2px solid rgba(224, 86, 253, 0.6);
+}
+
+.container p {
+  margin-top: 50px;
+  text-align: center;
+  font-size: 18px;
+}
+
+.container p a {
+  text-decoration: underline;
+  color: #e056fd;
+  font-weight: 700;
+}
+
+.container div {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+}
+
+.container div img {
+  width: 100px;
+  border-radius: 50%;
 }
 
 .centered {
