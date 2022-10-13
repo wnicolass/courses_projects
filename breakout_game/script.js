@@ -2,6 +2,8 @@ const rulesBtn = document.getElementById("rules-btn");
 const closeBtn = document.getElementById("close-btn");
 const rules = document.getElementById("rules");
 
+let score = 0;
+
 const canvas = document.getElementById("canvas");
 const ctx = canvas.getContext("2d");
 
@@ -41,9 +43,15 @@ function drawBall() {
   ctx.closePath();
 }
 
+function drawScore() {
+  ctx.font = "20px Arial";
+  ctx.fillText(`Score: ${score}`, canvas.width - 100, 30);
+}
+
 function draw() {
   drawBall();
   drawPaddle();
+  drawScore();
 }
 
 draw();
