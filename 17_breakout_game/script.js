@@ -15,9 +15,9 @@ const ball = {
   x: canvas.width / 2,
   y: canvas.height / 2,
   size: 10,
-  speed: 4,
-  dx: 4,
-  dy: -4,
+  speed: 3,
+  dx: 3,
+  dy: -3,
 };
 
 //paddle properties
@@ -95,6 +95,46 @@ function movePaddle() {
   }
 }
 
+function moveBall() {
+  ball.x += ball.dx;
+  ball.y += ball.dy;
+
+  //walls collision detection
+  if (ball.x + ball.size > canvas.width || ball.x - ball.size < 0) {
+    ball.dx *= -1; //reverse direction
+  }
+
+  if (ball.y + ball.size > canvas.height || ball.y - ball.size < 0) {
+    ball.dy *= -1;
+  }
+
+  //paddle collision detection
+  if (
+    ball.x - ball.size > paddle.x && //left paddle side check
+    ball.x + ball.size < paddle.x + paddle.w && //right paddle side check
+    ball.y + ball.size > paddle.y //top paddle side check
+  ) {
+    ball.dy = -ball.speed;
+  }
+
+  //bricks collision
+  bricks.forEach((column) => {
+    column.forEach((brick) => {
+      if (brick.visible) {
+        if (
+          ball.x - ball.size > brick.x && // left side check
+          ball.x + ball.size < brick.x + brick.w && // right side check
+          ball.y + ball.size > brick.y && // top side check
+          ball.y - ball.size < brick.y + brick.h // bottom side check
+        ) {
+          ball.dy *= -1;
+          brick.visible = false;
+        }
+      }
+    });
+  });
+}
+
 function draw() {
   ctx.clearRect(0, 0, canvas.width, canvas.height);
   drawBall();
@@ -105,6 +145,7 @@ function draw() {
 
 function update() {
   movePaddle();
+  moveBall();
 
   draw();
 
