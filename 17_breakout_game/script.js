@@ -96,6 +96,7 @@ function movePaddle() {
 }
 
 function draw() {
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
   drawBall();
   drawPaddle();
   drawScore();
@@ -115,15 +116,24 @@ update();
 function keyDown(e) {
   if (e.key === "Right" || e.key === "ArrowRight") {
     paddle.dx = paddle.speed;
+  } else if (e.key === "Left" || e.key === "ArrowLeft") {
+    paddle.dx = -paddle.speed;
   }
 }
 
 function keyUp(e) {
-  console.log(2);
+  if (
+    e.key === "Right" ||
+    e.key === "ArrowRight" ||
+    e.key === "Left" ||
+    e.key === "ArrowLeft"
+  ) {
+    paddle.dx = 0;
+  }
 }
 
 document.addEventListener("keydown", keyDown);
-document.addEventListener("keydown", keyUp);
+document.addEventListener("keyup", keyUp);
 
 rulesBtn.addEventListener("click", () => rules.classList.add("show"));
 closeBtn.addEventListener("click", () => rules.classList.remove("show"));
