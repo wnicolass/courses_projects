@@ -5,7 +5,7 @@ const rules = document.getElementById("rules");
 let score = 0;
 
 const brickRowCount = 9;
-const brickColumnCount = 9;
+const brickColumnCount = 5;
 
 const canvas = document.getElementById("canvas");
 const ctx = canvas.getContext("2d");
@@ -83,6 +83,18 @@ function drawBricks() {
   });
 }
 
+function movePaddle() {
+  paddle.x += paddle.dx;
+
+  if (paddle.x + paddle.w > canvas.width) {
+    paddle.x = canvas.width - paddle.w;
+  }
+
+  if (paddle.x < 0) {
+    paddle.x = 0;
+  }
+}
+
 function draw() {
   drawBall();
   drawPaddle();
@@ -90,7 +102,28 @@ function draw() {
   drawBricks();
 }
 
-draw();
+function update() {
+  movePaddle();
+
+  draw();
+
+  requestAnimationFrame(update);
+}
+
+update();
+
+function keyDown(e) {
+  if (e.key === "Right" || e.key === "ArrowRight") {
+    paddle.dx = paddle.speed;
+  }
+}
+
+function keyUp(e) {
+  console.log(2);
+}
+
+document.addEventListener("keydown", keyDown);
+document.addEventListener("keydown", keyUp);
 
 rulesBtn.addEventListener("click", () => rules.classList.add("show"));
 closeBtn.addEventListener("click", () => rules.classList.remove("show"));
