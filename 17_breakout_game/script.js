@@ -18,16 +18,18 @@ const ball = {
   speed: 3,
   dx: 3,
   dy: -3,
+  visible: true,
 };
 
 //paddle properties
 const paddle = {
   x: canvas.width / 2 - 40,
   y: canvas.height - 20,
-  w: 80,
+  w: 300,
   h: 10,
   speed: 8,
   dx: 0,
+  visible: true,
 };
 
 const brickInfo = {
@@ -53,7 +55,7 @@ for (let i = 0; i < brickRowCount; i++) {
 function drawPaddle() {
   ctx.beginPath();
   ctx.rect(paddle.x, paddle.y, paddle.w, paddle.h);
-  ctx.fillStyle = "#0095dd";
+  ctx.fillStyle = "#fff";
   ctx.fill();
   ctx.closePath();
 }
@@ -61,7 +63,7 @@ function drawPaddle() {
 function drawBall() {
   ctx.beginPath();
   ctx.arc(ball.x, ball.y, ball.size, 0, Math.PI * 2);
-  ctx.fillStyle = "#0095dd";
+  ctx.fillStyle = "#f5f505";
   ctx.fill();
   ctx.closePath();
 }
@@ -76,7 +78,7 @@ function drawBricks() {
     column.forEach((brick) => {
       ctx.beginPath();
       ctx.rect(brick.x, brick.y, brick.w, brick.h);
-      ctx.fillStyle = brick.visible ? "#0095dd" : "transparent";
+      ctx.fillStyle = brick.visible ? "#fff" : "transparent";
       ctx.fill();
       ctx.closePath();
     });
@@ -99,7 +101,19 @@ function increaseScore() {
   score++;
 
   if (score % (brickRowCount * brickColumnCount) === 0) {
-    showAllBricks();
+    paddle.visible = false;
+    ball.visible = false;
+
+    setTimeout(() => {
+      showAllBricks();
+      score = 0;
+      paddle.x = canvas.width / 2 - 40;
+      paddle.y = canvas.height - 20;
+      ball.x = canvas.width / 2;
+      ball.y = canvas.height / 2;
+      ball.visible = true;
+      paddle.visible = true;
+    }, 700);
   }
 }
 
