@@ -1,3 +1,5 @@
+@import url("https://fonts.googleapis.com/css2?family=Press+Start+2P:wght@400;700&display=swap");
+
 * {
   box-sizing: border-box;
 }
@@ -14,7 +16,7 @@ body {
 }
 
 body * {
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: "Press Start 2P", sans-serif;
 }
 
 h1 {
