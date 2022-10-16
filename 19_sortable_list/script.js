@@ -2,16 +2,16 @@ const draggableList = document.getElementById("draggable-list");
 const check = document.getElementById("check");
 
 const animes = [
-  "Bleach: Sennen Kessen-hen",
-  "Steins;Gate",
-  "Hunter x Hunter (2011)",
-  "Gintama: The Final",
-  "Gintama': Enchousen",
-  "Shingeki no Kyojin Season 3 Part 2",
-  "Gintama'",
-  "Gintama°",
   "Fullmetal Alchemist: Brotherhood",
   "Kaguya-sama wa Kokurasetai: Ultra Romantic",
+  "Bleach: Sennen Kessen-hen",
+  "Gintama°",
+  "Steins;Gate",
+  "Shingeki no Kyojin Season 3 Part 2",
+  "Gintama'",
+  "Gintama: The Final",
+  "Gintama': Enchousen",
+  "Hunter x Hunter (2011)",
 ];
 
 const listItems = [];
