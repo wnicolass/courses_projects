@@ -29,15 +29,18 @@ function swapItems(fromIndex, toIndex) {
 function dragStart() {
   dragStartIndex = +this.closest("li").getAttribute("data-index");
 }
+
 function dragEnter() {
   this.classList.add("over");
 }
+
 function dragLeave() {
   this.classList.remove("over");
 }
 function dragOver(e) {
   e.preventDefault();
 }
+
 function dragDrop() {
   const dragEndIndex = +this.getAttribute("data-index");
   swapItems(dragStartIndex, dragEndIndex);
