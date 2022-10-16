@@ -46,6 +46,19 @@ function dragDrop() {
   this.classList.remove("over");
 }
 
+function checkOrder() {
+  listItems.forEach((listItem, idx) => {
+    const animeName = listItem.querySelector(".draggable").innerText.trim();
+
+    if (animeName !== animes[idx]) {
+      listItem.classList.add("wrong");
+    } else {
+      listItem.classList.remove("wrong");
+      listItem.classList.add("right");
+    }
+  });
+}
+
 function addEventListeners() {
   const draggables = document.querySelectorAll(".draggable");
   const dragListItems = document.querySelectorAll(".draggable-list li");
@@ -88,3 +101,5 @@ function createList() {
 }
 
 createList();
+
+check.addEventListener("click", checkOrder);
