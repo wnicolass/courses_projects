@@ -28,7 +28,6 @@ function swapItems(fromIndex, toIndex) {
 
 function dragStart() {
   dragStartIndex = +this.closest("li").getAttribute("data-index");
-  console.log(dragStartIndex);
 }
 function dragEnter() {
   this.classList.add("over");
