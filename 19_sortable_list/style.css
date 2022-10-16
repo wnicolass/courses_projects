@@ -56,6 +56,10 @@ body button i {
   font-size: 16px;
 }
 
+small {
+  margin-top: -19px;
+}
+
 .draggable-list {
   border: 1px solid var(--border-color);
   padding: 0;
