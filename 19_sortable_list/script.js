@@ -19,12 +19,16 @@ const listItems = [];
 let dragStartIndex;
 
 function createList() {
-  [...animes].forEach((anime, index) => {
-    const listItem = document.createElement("li");
+  [...animes]
+    .map((anime) => ({ value: anime, sort: Math.random() }))
+    .sort((a, b) => a.sort - b.sort)
+    .map((anime) => anime.value)
+    .forEach((anime, index) => {
+      const listItem = document.createElement("li");
 
-    listItem.setAttribute("data-index", index);
+      listItem.setAttribute("data-index", index);
 
-    listItem.innerHTML = `
+      listItem.innerHTML = `
             <span class="number">${index + 1}</span>
             <div class="draggable" draggable="true">
                 <p class="anime-name">${anime}</p>
@@ -32,10 +36,10 @@ function createList() {
             </div>
         `;
 
-    listItems.push(listItem);
+      listItems.push(listItem);
 
-    draggableList.appendChild(listItem);
-  });
+      draggableList.appendChild(listItem);
+    });
 }
 
 createList();
