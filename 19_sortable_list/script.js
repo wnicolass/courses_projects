@@ -18,6 +18,22 @@ const listItems = [];
 
 let dragStartIndex;
 
+function addEventListeners() {
+  const draggables = document.querySelectorAll(".draggable");
+  const dragListItems = document.querySelectorAll(".draggable-list li");
+
+  draggables.forEach((draggable) => {
+    draggable.addEventListener("dragstart", dragStart);
+  });
+
+  dragListItems.forEach((item) => {
+    item.addEventListener("dragover", dragOver);
+    item.addEventListener("drop", dragDrop);
+    item.addEventListener("dragenter", dragEnter);
+    item.addEventListener("dragleave", dragLeave);
+  });
+}
+
 function createList() {
   [...animes]
     .map((anime) => ({ value: anime, sort: Math.random() }))
@@ -38,6 +54,8 @@ function createList() {
       listItems.push(listItem);
 
       draggableList.appendChild(listItem);
+
+      addEventListeners();
     });
 }
 
