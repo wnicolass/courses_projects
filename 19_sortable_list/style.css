@@ -1,4 +1,8 @@
-@import url("https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700;900&display=swap");
+
+:root {
+  --border-color: #e3e5e4;
+}
 
 * {
   box-sizing: border-box;
@@ -6,6 +10,9 @@
 
 body {
   background-image: url("./assets/images/bg.jpg");
+  background-position: top center;
+  background-repeat: no-repeat;
+  background-size: 100% auto;
   background-color: #010101;
   display: flex;
   flex-direction: column;
@@ -19,4 +26,87 @@ body {
 body * {
   font-family: "Lato", sans-serif;
   color: #fff;
+}
+
+body button {
+  text-transform: uppercase;
+  font-weight: 700;
+
+  color: #000;
+
+  font-size: 16px;
+
+  letter-spacing: 1px;
+
+  cursor: pointer;
+
+  border: none;
+  border-radius: 5px;
+
+  padding: 10px 20px;
+  background-color: #fff;
+}
+
+body button:active {
+  transform: scale(0.98);
+}
+
+body button i {
+  color: #000;
+  font-size: 16px;
+}
+
+.draggable-list {
+  border: 1px solid var(--border-color);
+  padding: 0;
+  list-style: none;
+}
+
+.draggable-list li {
+  display: flex;
+  flex: 1;
+}
+
+.draggable-list li:not(:last-child) {
+  border-bottom: 1px solid var(--border-color);
+}
+
+.draggable-list .number {
+  background-color: #1f1f1f;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  font-size: 28px;
+
+  height: 60px;
+  width: 60px;
+}
+
+.draggable-list li.over .draggable {
+  background-color: rgb(120, 117, 117);
+}
+
+.draggable-list .anime-name {
+  margin: 0 20px 0 0;
+  font-weight: 900;
+}
+
+.draggable-list li.right .anime-name {
+  color: #3ae374;
+}
+
+.draggable-list li.wrong .anime-name {
+  color: #ff3e3e;
+}
+
+.draggable {
+  cursor: pointer;
+
+  display: flex;
+  flex: 1;
+  align-items: center;
+  justify-content: space-between;
+
+  padding: 15px;
 }

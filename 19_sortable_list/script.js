@@ -25,7 +25,6 @@ function createList() {
     .map((anime) => anime.value)
     .forEach((anime, index) => {
       const listItem = document.createElement("li");
-
       listItem.setAttribute("data-index", index);
 
       listItem.innerHTML = `
