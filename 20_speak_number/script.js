@@ -1,13 +1,13 @@
 const msgEl = document.getElementById("msg");
 
-function getRandomNumber(min, max) {
-  return Math.floor(Math.random() * (max - min)) + min;
-}
-
 window.SpeechRecognition =
   window.SpeechRecognition || window.webkitSpeechRecognition;
 
 let recognition = new window.SpeechRecognition();
+
+function getRandomNumber(min, max) {
+  return Math.floor(Math.random() * (max - min)) + min;
+}
 
 function writeMessage(msg) {
   msgEl.innerHTML = `
