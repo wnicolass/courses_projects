@@ -20,7 +20,7 @@ function checkNumber(msg) {
   const num = +msg;
 
   if (Number.isNaN(num)) {
-    msgEl.innerHTML = "<div>That is not a valid number</div>";
+    msgEl.innerHTML += "<div>That is not a valid number</div>";
     return;
   }
 
@@ -54,3 +54,9 @@ recognition.start();
 const randomNum = getRandomNumber(1, 100);
 
 recognition.addEventListener("result", onSpeak);
+
+recognition.addEventListener("end", () => recognition.start());
+
+document.body.addEventListener("click", (e) => {
+  e.target.id === "play-again" ? window.location.reload() : false;
+});
