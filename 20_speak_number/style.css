@@ -21,3 +21,9 @@ body {
 body * {
   font-family: "Poppins", sans-serif;
 }
+
+@media (max-width: 500px) {
+  body h1 {
+    font-size: 28px;
+  }
+}
