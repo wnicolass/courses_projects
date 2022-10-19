@@ -8,7 +8,19 @@ let apiQuotes = [];
 
 function newQuote() {
   const quote = apiQuotes[Math.floor(Math.random() * apiQuotes.length) + 1];
-  authorText.textContent = quote.author;
+
+  if (!quote.author) {
+    authorText.textContent = "Unknown";
+  } else {
+    authorText.textContent = quote.author;
+  }
+
+  if (quote.text.length > 50) {
+    quoteText.classList.add("long-quote");
+  } else {
+    quoteText.classList.remove("long-quote");
+  }
+
   quoteText.textContent = quote.text;
 }
 
