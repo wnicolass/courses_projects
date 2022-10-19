@@ -7,18 +7,18 @@ const loader = document.getElementById("loader");
 
 let apiQuotes = [];
 
-function loading() {
+function showLoadingSpinner() {
   loader.hidden = false;
   quoteContainer.hidden = true;
 }
 
-function complete() {
+function removeLoadingSpinner() {
   quoteContainer.hidden = false;
   loader.hidden = true;
 }
 
 function newQuote() {
-  loading();
+  showLoadingSpinner();
   setTimeout(() => {
     const quote = apiQuotes[Math.floor(Math.random() * apiQuotes.length) + 1];
 
@@ -35,7 +35,7 @@ function newQuote() {
     }
 
     quoteText.textContent = quote.text;
-    complete();
+    removeLoadingSpinner();
   }, 700);
 }
 
@@ -50,6 +50,7 @@ async function getQuotes() {
     newQuote();
   } catch (err) {
     alert("Fail to get the quotes");
+    removeLoadingSpinner();
   }
 }
 
