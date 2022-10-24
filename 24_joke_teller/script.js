@@ -1,3 +1,6 @@
+const button = document.getElementById("button");
+const audioElement = document.getElementById("audio");
+
 // VoiceRSS Javascript SDK
 const VoiceRSS = {
   speech: function (e) {
@@ -35,7 +38,8 @@ const VoiceRSS = {
     (t.onreadystatechange = function () {
       if (4 == t.readyState && 200 == t.status) {
         if (0 == t.responseText.indexOf("ERROR")) throw t.responseText;
-        (audioElement.src = t.responseText), audioElement.play();
+        audioElement.src = t.responseText;
+        audioElement.play();
       }
     }),
       t.open("POST", "https://api.voicerss.org/", !0),
@@ -101,3 +105,39 @@ const VoiceRSS = {
     throw "The browser does not support HTTP request";
   },
 };
+
+// function test() {
+//   VoiceRSS.speech({
+//     key: "d543dfa4a84a402b9140d695a4bca653",
+//     src: "Hello, world!",
+//     hl: "en-us",
+//     v: "Linda",
+//     r: 0,
+//     c: "mp3",
+//     f: "44khz_16bit_stereo",
+//     ssml: false,
+//   });
+// }
+
+// test();
+async function getJokes() {
+  let joke = "";
+  const apiURL =
+    "https://v2.jokeapi.dev/joke/Programming?blacklistFlags=nsfw,religious,political,racist,sexist,explicit";
+  try {
+    const res = await fetch(apiURL);
+    const data = await res.json();
+
+    if (data.setup) {
+      joke = `${data.setup} ... ${data.delivery}`;
+    } else {
+      joke = data.joke;
+    }
+
+    console.log(joke);
+  } catch (err) {
+    console.log("whoops", err);
+  }
+}
+
+getJokes();
