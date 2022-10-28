@@ -121,6 +121,59 @@ nav li:nth-of-type(5) {
   background-color: var(--nav-color5);
 }
 
+/* Slide animation */
+.slide-in-1 {
+  animation: slideIn 0.4s linear 0.2s both;
+}
+.slide-in-2 {
+  animation: slideIn 0.4s linear 0.4s both;
+}
+.slide-in-3 {
+  animation: slideIn 0.4s linear 0.6s both;
+}
+.slide-in-4 {
+  animation: slideIn 0.4s linear 0.8s both;
+}
+.slide-in-5 {
+  animation: slideIn 0.4s linear 1s both;
+}
+
+@keyframes slideIn {
+  from {
+    transform: translateX(-100%);
+  }
+
+  to {
+    transform: translateX(0);
+  }
+}
+
+.slide-out-1 {
+  animation: slideOut 0.3s linear 0.5s both;
+}
+.slide-out-2 {
+  animation: slideOut 0.3s linear 0.4s both;
+}
+.slide-out-3 {
+  animation: slideOut 0.3s linear 0.3s both;
+}
+.slide-out-4 {
+  animation: slideOut 0.3s linear 0.2s both;
+}
+.slide-out-5 {
+  animation: slideOut 0.3s linear 0.1s both;
+}
+
+@keyframes slideOut {
+  from {
+    transform: translateX(0);
+  }
+
+  to {
+    transform: translateX(-100%);
+  }
+}
+
 /* --- Menu Bars ------------------------------------ */
 
 .menu-bars {
