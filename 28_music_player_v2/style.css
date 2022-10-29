@@ -14,7 +14,7 @@ body {
   justify-content: center;
   align-items: center;
 
-  font-family: "Spartan", sans-serif;
+  font-family: "League Spartan", sans-serif;
   font-size: 12px;
 }
 
@@ -116,7 +116,7 @@ h3 {
 /* Media Query: iPhone (Vertical) */
 @media screen and (max-width: 376px) {
   .player-container {
-    width: 95vw;
+    width: 90%;
   }
 
   .img-container {
