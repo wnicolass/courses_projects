@@ -84,6 +84,17 @@ function prevSong() {
 
 loadSong(songs[currentSongIndex]);
 
+function handleTime(time) {
+  const timeMinutes = Math.floor(time / 60);
+  let timeSeconds = Math.floor(time % 60);
+  timeSeconds = timeSeconds < 10 ? `0${timeSeconds}` : timeSeconds;
+
+  return {
+    min: timeMinutes,
+    sec: timeSeconds,
+  };
+}
+
 function updateProgressBar(e) {
   if (isPlaying) {
     const { duration, currentTime } = e.srcElement;
@@ -91,32 +102,23 @@ function updateProgressBar(e) {
     const progressPercent = (currentTime / duration) * 100;
     progress.style.width = `${progressPercent}%`;
 
-    const durationMinutes = Math.floor(duration / 60);
-    let durationSeconds = Math.floor(duration % 60);
-    durationSeconds =
-      durationSeconds < 10 ? `0${durationSeconds}` : durationSeconds;
+    const songDurationForUI = handleTime(duration);
+    const { min: durationMinutes, sec: durationSeconds } = songDurationForUI;
 
     if (durationSeconds) {
       durationEl.textContent = `${durationMinutes}:${durationSeconds}`;
     }
 
-    const currentMinutes = Math.floor(currentTime / 60);
-    let currentSeconds = Math.floor(currentTime % 60);
-    currentSeconds =
-      currentSeconds < 10 ? `0${currentSeconds}` : currentSeconds;
-    currentTimeEl.textContent = `${
-      currentMinutes < 10 ? `0${currentMinutes}` : currentMinutes
-    }:${currentSeconds}`;
+    let songProgress = handleTime(currentTime);
+    let { min: currentMinutes, sec: currentSeconds } = songProgress;
+    currentTimeEl.textContent = `${currentMinutes}:${currentSeconds}`;
   }
 }
 
 function setProgressBar(e) {
   const width = this.clientWidth;
-  console.log(width);
   const clickX = e.offsetX;
-  console.log(clickX);
   const { duration } = music;
-  console.log(duration);
   music.currentTime = (clickX / width) * duration;
 }
 
