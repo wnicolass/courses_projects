@@ -10,6 +10,7 @@ const timeElements = document.querySelectorAll("span");
 let countdownTitle = "";
 let countdownDate = "";
 let countdownValue = Date;
+let countdownActive;
 
 const sec = 1000;
 const min = sec * 60;
@@ -20,23 +21,25 @@ const today = new Date().toISOString().split("T")[0];
 dateEl.setAttribute("min", today);
 
 function updateDOM() {
-  const now = new Date().getTime();
-  const diff = countdownValue - now;
+  countdownActive = setInterval(() => {
+    const now = new Date().getTime();
+    const diff = countdownValue - now;
 
-  const days = Math.floor(diff / day);
-  const hours = Math.floor((diff % day) / hour);
-  const minutes = Math.floor((diff % hour) / min);
-  const seconds = Math.floor((diff % min) / sec);
+    const days = Math.floor(diff / day);
+    const hours = Math.floor((diff % day) / hour);
+    const minutes = Math.floor((diff % hour) / min);
+    const seconds = Math.floor((diff % min) / sec);
 
-  // @todo - refactor
-  countdownElTitle.textContent = `${countdownTitle}`;
-  timeElements[0].textContent = `${days}`;
-  timeElements[1].textContent = `${hours}`;
-  timeElements[2].textContent = `${minutes}`;
-  timeElements[3].textContent = `${seconds}`;
+    // @todo - refactor
+    countdownElTitle.textContent = `${countdownTitle}`;
+    timeElements[0].textContent = `${days}`;
+    timeElements[1].textContent = `${hours}`;
+    timeElements[2].textContent = `${minutes}`;
+    timeElements[3].textContent = `${seconds}`;
 
-  inputContainer.hidden = true;
-  countdownEl.hidden = false;
+    inputContainer.hidden = true;
+    countdownEl.hidden = false;
+  }, sec);
 }
 
 function updateCountdown(e) {
@@ -52,4 +55,14 @@ function updateCountdown(e) {
   updateDOM();
 }
 
+function reset() {
+  countdownEl.hidden = true;
+  inputContainer.hidden = false;
+
+  clearInterval(countdownActive);
+  countdownTitle = "";
+  countdownDate = "";
+}
+
 countdownForm.addEventListener("submit", updateCountdown);
+countdownBtn.addEventListener("click", reset);
