@@ -14,6 +14,7 @@ let countdownTitle = "";
 let countdownDate = "";
 let countdownValue = Date;
 let countdownActive;
+let savedCountdown;
 
 const sec = 1000;
 const min = sec * 60;
@@ -59,11 +60,16 @@ function updateCountdown(e) {
     e.srcElement[1].value,
   ];
 
+  savedCountdown = {
+    title: countdownTitle,
+    date: countdownDate,
+  };
+  localStorage.setItem("countdown", JSON.stringify(savedCountdown));
+
   if (countdownDate.trim() === "") {
     alert("Please select a date for the countdown.");
   } else {
     countdownValue = new Date(countdownDate).getTime();
-    console.log("countdown value:", countdownValue);
     updateDOM();
   }
 }
@@ -78,8 +84,21 @@ function reset() {
   countdownDate = "";
 }
 
+function restorePreviousCountdown() {
+  if (localStorage.getItem("countdown")) {
+    inputContainer.hidden = true;
+    savedCountdown = JSON.parse(localStorage.getItem("countdown"));
+    countdownTitle = savedCountdown.title;
+    countdownDate = savedCountdown.date;
+    countdownValue = new Date(countdownDate).getTime();
+    updateDOM();
+  }
+}
+
 countdownForm.addEventListener("submit", updateCountdown);
 countdownBtn.addEventListener("click", reset);
 completeEl.addEventListener("click", (e) => {
   e.target.classList.contains("complete-btn") ? reset() : false;
 });
+
+restorePreviousCountdown();
