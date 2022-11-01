@@ -48,11 +48,14 @@ function updateCountdown(e) {
     e.srcElement[0].value,
     e.srcElement[1].value,
   ];
-  console.log(countdownTitle, countdownDate);
 
-  countdownValue = new Date(countdownDate).getTime();
-  console.log("countdown value:", countdownValue);
-  updateDOM();
+  if (countdownDate.trim() === "") {
+    alert("Please select a date for the countdown.");
+  } else {
+    countdownValue = new Date(countdownDate).getTime();
+    console.log("countdown value:", countdownValue);
+    updateDOM();
+  }
 }
 
 function reset() {
