@@ -12,7 +12,7 @@ const completeInfoEl = document.getElementById("complete-info");
 
 let countdownTitle = "";
 let countdownDate = "";
-let countdownValue = Date;
+let countdownValue = new Date();
 let countdownActive;
 let savedCountdown;
 
@@ -24,16 +24,21 @@ const day = hour * 24;
 const today = new Date().toISOString().split("T")[0];
 dateEl.setAttribute("min", today);
 
+function handleDate() {
+  const now = new Date().getTime();
+  const diff = countdownValue - now;
+
+  const days = Math.floor(diff / day);
+  const hours = Math.floor((diff % day) / hour);
+  const minutes = Math.floor((diff % hour) / min);
+  const seconds = Math.floor((diff % min) / sec);
+
+  return [diff, days, hours, minutes, seconds];
+}
+
 function updateDOM() {
   countdownActive = setInterval(() => {
-    const now = new Date().getTime();
-    const diff = countdownValue - now;
-
-    const days = Math.floor(diff / day);
-    const hours = Math.floor((diff % day) / hour);
-    const minutes = Math.floor((diff % hour) / min);
-    const seconds = Math.floor((diff % min) / sec);
-
+    const [diff, days, hours, minutes, seconds] = handleDate();
     inputContainer.hidden = true;
 
     if (diff < 0) {
@@ -82,6 +87,7 @@ function reset() {
   clearInterval(countdownActive);
   countdownTitle = "";
   countdownDate = "";
+  localStorage.removeItem("countdown");
 }
 
 function restorePreviousCountdown() {
