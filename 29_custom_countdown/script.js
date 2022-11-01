@@ -11,13 +11,32 @@ let countdownTitle = "";
 let countdownDate = "";
 let countdownValue = Date;
 
+const sec = 1000;
+const min = sec * 60;
+const hour = min * 60;
+const day = hour * 24;
+
 const today = new Date().toISOString().split("T")[0];
 dateEl.setAttribute("min", today);
 
 function updateDOM() {
   const now = new Date().getTime();
   const diff = countdownValue - now;
-  console.log(diff);
+
+  const days = Math.floor(diff / day);
+  const hours = Math.floor((diff % day) / hour);
+  const minutes = Math.floor((diff % hour) / min);
+  const seconds = Math.floor((diff % min) / sec);
+
+  // @todo - refactor
+  countdownElTitle.textContent = `${countdownTitle}`;
+  timeElements[0].textContent = `${days}`;
+  timeElements[1].textContent = `${hours}`;
+  timeElements[2].textContent = `${minutes}`;
+  timeElements[3].textContent = `${seconds}`;
+
+  inputContainer.hidden = true;
+  countdownEl.hidden = false;
 }
 
 function updateCountdown(e) {
