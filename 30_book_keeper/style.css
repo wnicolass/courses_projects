@@ -47,3 +47,23 @@ h1:hover {
 h1:active {
   transform: scale(1);
 }
+
+/* Bookmarks */
+.container {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+
+.item {
+  background: rgba(0, 0, 0, 0.5);
+  color: #fff;
+  border-radius: var(--border-radius);
+
+  padding: 20px;
+  margin: 10px;
+}
+
+.item:hover {
+  background: rgba(0, 0, 0, 0.6);
+}
