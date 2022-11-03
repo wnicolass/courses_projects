@@ -38,7 +38,6 @@ function storeBookmark(e) {
     urlValue = `https://${urlValue}`;
   }
 
-  console.log(nameValue, urlValue);
   if (!validate(nameValue, urlValue)) {
     return false;
   }
