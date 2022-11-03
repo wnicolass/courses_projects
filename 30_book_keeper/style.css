@@ -36,16 +36,15 @@ h1 {
   cursor: pointer;
   user-select: none;
 
-  transition: transform 0.2s ease-in-out, background-color 0.2s ease;
+  transition: transform 0.1s ease-in-out, background-color 0.2s ease;
 }
 
 h1:hover {
   background-color: rgba(0, 0, 0, 0.8);
-  transform: scale(1.1);
 }
 
 h1:active {
-  transform: scale(1);
+  transform: scale(95%);
 }
 
 /* Bookmarks */
