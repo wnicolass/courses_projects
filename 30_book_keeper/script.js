@@ -6,7 +6,7 @@ const websiteNameEl = document.getElementById("website-name");
 const websiteURLEl = document.getElementById("website-url");
 const bookmarksContainer = document.getElementById("bookmarks-container");
 
-let bookmarks = [];
+let bookmarks = {};
 
 function showModal() {
   modal.classList.add("show-modal");
@@ -33,15 +33,15 @@ function validate(nameValue, urlValue) {
 
 function buildBookmarks() {
   bookmarksContainer.textContent = "";
-  bookmarks.forEach((bookmark) => {
-    const { name, url } = bookmark;
+  Object.keys(bookmarks).forEach((id) => {
+    const { name, url } = bookmarks[id];
     const item = document.createElement("div");
     item.classList.add("item");
 
     const closeIcon = document.createElement("i");
     closeIcon.classList.add("fas", "fa-times");
     closeIcon.setAttribute("title", "Delete bookmark");
-    closeIcon.setAttribute("onclick", `deleteBookmark('${url}')`);
+    closeIcon.setAttribute("onclick", `deleteBookmark('${id}')`);
 
     const linkInfo = document.createElement("div");
     linkInfo.classList.add("name");
@@ -68,24 +68,21 @@ function fetchBookmarks() {
   if (localStorage.getItem("bookmarks")) {
     bookmarks = JSON.parse(localStorage.getItem("bookmarks"));
   } else {
-    bookmarks = [
-      {
-        name: "Nicolas Github",
-        url: "https://github.com/wnicolass",
-      },
-    ];
+    const id = `https://zerotomastery.io`;
+    bookmarks[id] = {
+      name: "ZTM",
+      url: "https://zerotomastery.io",
+    };
     localStorage.setItem("bookmarks", JSON.stringify(bookmarks));
   }
 
   buildBookmarks();
 }
 
-function deleteBookmark(url) {
-  bookmarks.forEach((bookmark, idx) => {
-    if (bookmark.url === url) {
-      bookmarks.splice(idx, 1);
-    }
-  });
+function deleteBookmark(id) {
+  if (bookmarks[id]) {
+    delete bookmarks[id];
+  }
 
   localStorage.setItem("bookmarks", JSON.stringify(bookmarks));
   fetchBookmarks();
@@ -108,8 +105,7 @@ function storeBookmark(e) {
     name: nameValue,
     url: urlValue,
   };
-
-  bookmarks.push(bookmark);
+  bookmarks[urlValue] = bookmark;
   localStorage.setItem("bookmarks", JSON.stringify(bookmarks));
   fetchBookmarks();
   bookmarkForm.reset();
