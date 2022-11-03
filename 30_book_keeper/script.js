@@ -6,6 +6,8 @@ const websiteNameEl = document.getElementById("website-name");
 const websiteURLEl = document.getElementById("website-url");
 const bookmarksContainer = document.getElementById("bookmarks-container");
 
+let bookmarks = [];
+
 function showModal() {
   modal.classList.add("show-modal");
   websiteNameEl.focus();
@@ -41,6 +43,17 @@ function storeBookmark(e) {
   if (!validate(nameValue, urlValue)) {
     return false;
   }
+
+  const bookmark = {
+    name: nameValue,
+    url: urlValue,
+  };
+
+  bookmarks.push(bookmark);
+  console.log(bookmarks);
+  localStorage.setItem("bookmarks", JSON.stringify(bookmarks));
+  bookmarkForm.reset();
+  websiteNameEl.focus();
 }
 
 bookmarkForm.addEventListener("submit", storeBookmark);
