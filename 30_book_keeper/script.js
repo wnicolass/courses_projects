@@ -32,6 +32,7 @@ function validate(nameValue, urlValue) {
 }
 
 function buildBookmarks() {
+  bookmarksContainer.textContent = "";
   bookmarks.forEach((bookmark) => {
     const { name, url } = bookmark;
     const item = document.createElement("div");
@@ -77,6 +78,17 @@ function fetchBookmarks() {
   }
 
   buildBookmarks();
+}
+
+function deleteBookmark(url) {
+  bookmarks.forEach((bookmark, idx) => {
+    if (bookmark.url === url) {
+      bookmarks.splice(idx, 1);
+    }
+  });
+
+  localStorage.setItem("bookmarks", JSON.stringify(bookmarks));
+  fetchBookmarks();
 }
 
 function storeBookmark(e) {
