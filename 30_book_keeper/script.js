@@ -11,6 +11,40 @@ function showModal() {
   websiteNameEl.focus();
 }
 
+function validate(nameValue, urlValue) {
+  const expression =
+    /https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\+.~#?&//=]*)/g;
+
+  const regex = new RegExp(expression);
+  if (!nameValue.trim() || !urlValue.trim()) {
+    alert("Please submit values for both fields");
+    return false;
+  }
+
+  if (!urlValue.match(regex)) {
+    alert("Please provide a valide web address");
+    return false;
+  }
+
+  return true;
+}
+
+function storeBookmark(e) {
+  e.preventDefault();
+  const nameValue = websiteNameEl.value;
+  let urlValue = websiteURLEl.value;
+
+  if (!urlValue.includes("http://") && !urlValue.includes("https://")) {
+    urlValue = `https://${urlValue}`;
+  }
+
+  console.log(nameValue, urlValue);
+  if (!validate(nameValue, urlValue)) {
+    return false;
+  }
+}
+
+bookmarkForm.addEventListener("submit", storeBookmark);
 showModalBtn.addEventListener("click", showModal);
 closeModalBtn.addEventListener("click", () =>
   modal.classList.remove("show-modal")
