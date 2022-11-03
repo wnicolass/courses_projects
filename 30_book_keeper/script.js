@@ -31,6 +31,20 @@ function validate(nameValue, urlValue) {
   return true;
 }
 
+function fetchBookmarks() {
+  if (localStorage.getItem("bookmarks")) {
+    bookmarks = JSON.parse(localStorage.getItem("bookmarks"));
+  } else {
+    bookmarks = [
+      {
+        name: "Nicolas Github",
+        url: "https://github.com/wnicolass",
+      },
+    ];
+    localStorage.setItem("bookmarks", JSON.stringify(bookmarks));
+  }
+}
+
 function storeBookmark(e) {
   e.preventDefault();
   const nameValue = websiteNameEl.value;
@@ -52,6 +66,7 @@ function storeBookmark(e) {
   bookmarks.push(bookmark);
   console.log(bookmarks);
   localStorage.setItem("bookmarks", JSON.stringify(bookmarks));
+  fetchBookmarks();
   bookmarkForm.reset();
   websiteNameEl.focus();
 }
@@ -64,3 +79,5 @@ closeModalBtn.addEventListener("click", () =>
 window.addEventListener("click", (e) => {
   e.target === modal ? modal.classList.remove("show-modal") : false;
 });
+
+fetchBookmarks();
