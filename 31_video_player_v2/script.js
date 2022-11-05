@@ -27,8 +27,24 @@ function togglePlay() {
   }
 }
 
+function displayTime(time) {
+  let min =
+    Math.floor(time / 60) < 10
+      ? `0${Math.floor(time / 60)}`
+      : Math.floor(time % 60);
+  let sec =
+    Math.floor(time % 60) < 10
+      ? `0${Math.floor(time % 60)}`
+      : Math.floor(time % 60);
+  console.log(min, sec);
+
+  return `${min}:${sec}`;
+}
+
 function updateProgress() {
   progressBar.style.width = `${(video.currentTime / video.duration) * 100}%`;
+  currentTime.textContent = `${displayTime(video.currentTime)} /`;
+  duration.textContent = `${displayTime(video.duration)}`;
 }
 
 video.addEventListener("ended", showPlayIcon);
