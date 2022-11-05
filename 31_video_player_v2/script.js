@@ -23,8 +23,16 @@ function togglePlay() {
     playBtn.setAttribute("title", "Pause");
   } else {
     video.pause();
+    showPlayIcon();
   }
 }
 
+function updateProgress() {
+  progressBar.style.width = `${(video.currentTime / video.duration) * 100}%`;
+}
+
+video.addEventListener("ended", showPlayIcon);
 playBtn.addEventListener("click", togglePlay);
 video.addEventListener("click", togglePlay);
+video.addEventListener("timeupdate", updateProgress);
+video.addEventListener("canplay", updateProgress);
