@@ -36,7 +36,6 @@ function displayTime(time) {
     Math.floor(time % 60) < 10
       ? `0${Math.floor(time % 60)}`
       : Math.floor(time % 60);
-  console.log(min, sec);
 
   return `${min}:${sec}`;
 }
@@ -47,8 +46,15 @@ function updateProgress() {
   duration.textContent = `${displayTime(video.duration)}`;
 }
 
+function setProgress(e) {
+  const newTime = e.offsetX / progressRange.offsetWidth;
+  progressBar.style.width = `${newTime * 100}%`;
+  video.currentTime = newTime * video.duration;
+}
+
 video.addEventListener("ended", showPlayIcon);
 playBtn.addEventListener("click", togglePlay);
 video.addEventListener("click", togglePlay);
 video.addEventListener("timeupdate", updateProgress);
 video.addEventListener("canplay", updateProgress);
+progressRange.addEventListener("click", setProgress);
