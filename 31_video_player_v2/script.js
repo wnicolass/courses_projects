@@ -132,12 +132,7 @@ function closeFullscreen() {
 let isFullscreen = false;
 
 function toggleFullscreen() {
-  if (!isFullscreen) {
-    openFullscreen(player);
-  } else {
-    closeFullscreen();
-  }
-
+  !isFullscreen ? openFullscreen(player) : closeFullscreen();
   isFullscreen = !isFullscreen;
 }
 
