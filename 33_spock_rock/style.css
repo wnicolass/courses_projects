@@ -14,9 +14,20 @@ body {
   align-items: center;
 }
 
+.game-container {
+  width: 530px;
+  height: 600px;
+
+  background-color: #fff;
+  border-radius: 5px;
+  box-shadow: 0 10px 20px -5px rgba(0, 0, 0, 0.5);
+}
+
 .header {
   background: dodgerblue;
-
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+  height: 100px;
   display: flex;
   justify-content: center;
   align-items: center;
