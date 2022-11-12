@@ -36,6 +36,17 @@ function resetSelected() {
   });
 }
 
+function resetAll() {
+  playerScore = 0;
+  computerScore = 0;
+  playerScoreEl.textContent = playerScore;
+  computerScoreEl.textContent = computerScore;
+  playerChoiceEl.textContent = "";
+  computerChoiceEl.textContent = "";
+  resultText.textContent = "";
+  resetSelected();
+}
+
 function computerRandomChoice() {
   const computerChoiceNumber = Math.floor(Math.random() * 5);
   switch (computerChoiceNumber) {
@@ -119,3 +130,5 @@ function select(playerChoice) {
       break;
   }
 }
+
+resetAll();
