@@ -26,14 +26,54 @@ const choices = {
   spock: { name: "Spock", defeats: ["scissors", "rock"] },
 };
 
+let computerChoice = "";
+
 function resetSelected() {
   allGameIcons.forEach((icon) => {
     icon.classList.remove("selected");
   });
 }
 
-function select(playerChoice) {
+function computerRandomChoice() {
+  const computerChoiceNumber = Math.floor(Math.random() * 5);
+  switch (computerChoiceNumber) {
+    case 0:
+      computerChoice = "rock";
+      computerRock.classList.add("selected");
+      computerChoiceEl.textContent = " --- Rock";
+      break;
+    case 1:
+      computerChoice = "paper";
+      computerPaper.classList.add("selected");
+      computerChoiceEl.textContent = " --- Paper";
+      break;
+    case 2:
+      computerChoice = "scissors";
+      computerScissors.classList.add("selected");
+      computerChoiceEl.textContent = " --- Scissors";
+      break;
+    case 3:
+      computerChoice = "lizard";
+      computerLizard.classList.add("selected");
+      computerChoiceEl.textContent = " --- Lizard";
+      break;
+    case 4:
+      computerChoice = "spock";
+      computerSpock.classList.add("selected");
+      computerChoiceEl.textContent = " --- Spock";
+      break;
+    default:
+      break;
+  }
+}
+
+function checkResult() {
   resetSelected();
+  computerRandomChoice();
+}
+
+function select(playerChoice) {
+  checkResult();
   switch (playerChoice) {
     case "rock":
       playerRock.classList.add("selected");
