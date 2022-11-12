@@ -26,6 +26,8 @@ const choices = {
   spock: { name: "Spock", defeats: ["scissors", "rock"] },
 };
 
+let playerScore = 0;
+let computerScore = 0;
 let computerChoice = "";
 
 function resetSelected() {
@@ -67,13 +69,31 @@ function computerRandomChoice() {
   }
 }
 
-function checkResult() {
+function updateScore(playerChoice) {
+  if (playerChoice === computerChoice) {
+    resultText.textContent = "It's a tie.";
+  } else {
+    const choice = choices[playerChoice];
+    if (choice.defeats.indexOf(computerChoice) > -1) {
+      resultText.textContent = "You Won!";
+      playerScore++;
+      playerScoreEl.textContent = playerScore;
+    } else {
+      resultText.textContent = "You Lost!";
+      computerScore++;
+      computerScoreEl.textContent = computerScore;
+    }
+  }
+}
+
+function checkResult(playerChoice) {
   resetSelected();
   computerRandomChoice();
+  updateScore(playerChoice);
 }
 
 function select(playerChoice) {
-  checkResult();
+  checkResult(playerChoice);
   switch (playerChoice) {
     case "rock":
       playerRock.classList.add("selected");
