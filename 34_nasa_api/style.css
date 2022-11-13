@@ -65,12 +65,13 @@ body {
 
 .clickable:hover {
   color: #186fc6;
-  transform: scale(1.2);
+  transform: scale(1.1);
 }
 
 /* Images Container */
 .images-container {
   margin-top: 50px;
+  width: 800px;
 }
 
 .card {
@@ -83,6 +84,12 @@ body {
 
 .card:hover {
   box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
+}
+
+.card-img-top {
+  width: 100%;
+  height: auto;
+  border-radius: 5px 5px 0 0;
 }
 
 .card-body {
