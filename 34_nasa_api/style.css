@@ -25,6 +25,10 @@ body {
   background-color: whitesmoke;
   height: 100vh;
   width: 100vw;
+
+  position: fixed;
+  z-index: 10;
+
   display: flex;
   justify-content: center;
   align-items: center;
@@ -47,6 +51,21 @@ body {
   right: 0;
   width: 100%;
   height: 60px;
+  z-index: -1;
+}
+
+.clickable {
+  color: #1e90ff;
+  cursor: pointer;
+
+  user-select: none;
+
+  transition: all 0.3s ease-in-out;
+}
+
+.clickable:hover {
+  color: #186fc6;
+  transform: scale(1.2);
 }
 
 /* Images Container */
