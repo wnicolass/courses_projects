@@ -37,6 +37,19 @@ function getRandomNumber(min, max) {
   return Math.floor(Math.random() * (max - min) + min);
 }
 
+function equationsToDOM() {
+  equationsArray.forEach((equation) => {
+    const item = document.createElement("div");
+    item.classList.add("item");
+
+    const equationText = document.createElement("h1");
+    equationText.textContent = equation.value;
+
+    item.appendChild(equationText);
+    itemContainer.appendChild(item);
+  });
+}
+
 function createEquations() {
   const correctEquations = getRandomNumber(1, questionAmount);
 
@@ -69,6 +82,7 @@ function createEquations() {
     module.default(equationsArray);
   });
   console.log(equationsArray);
+  equationsToDOM();
 }
 
 // Dynamically adding correct/incorrect equations
