@@ -84,8 +84,27 @@ function createEquations() {
 //   itemContainer.appendChild(bottomSpacer);
 // }
 
+function countdownStart() {
+  let number = 3;
+  const interval = setInterval(() => {
+    countdown.textContent = number;
+    number--;
+
+    if (number === -1) {
+      clearInterval(interval);
+      countdown.textContent = "Go!";
+    }
+  }, 1000);
+}
+
+function showCountdown() {
+  countdownPage.hidden = false;
+  splashPage.hidden = true;
+  countdownStart();
+}
+
 function getRadioValue() {
-  let radioValue = 0;
+  let radioValue;
   radioInputs.forEach((radioInput) => {
     if (radioInput.checked) {
       radioValue = radioInput.value;
@@ -98,6 +117,9 @@ function selectQuestionAmount(e) {
   e.preventDefault();
   questionAmount = getRadioValue();
   console.log(questionAmount);
+  if (questionAmount) {
+    showCountdown();
+  }
 }
 
 startForm.addEventListener("click", () => {
