@@ -20,6 +20,7 @@ const playAgainBtn = document.querySelector(".play-again");
 
 // Equations
 
+let questionAmount = 0;
 let equationsArray = [];
 
 // Game Page
@@ -83,6 +84,22 @@ function createEquations() {
 //   itemContainer.appendChild(bottomSpacer);
 // }
 
+function getRadioValue() {
+  let radioValue = 0;
+  radioInputs.forEach((radioInput) => {
+    if (radioInput.checked) {
+      radioValue = radioInput.value;
+    }
+  });
+  return radioValue;
+}
+
+function selectQuestionAmount(e) {
+  e.preventDefault();
+  questionAmount = getRadioValue();
+  console.log(questionAmount);
+}
+
 startForm.addEventListener("click", () => {
   radioContainers.forEach((radioEl) => {
     radioEl.classList.remove("selected-label");
@@ -92,4 +109,4 @@ startForm.addEventListener("click", () => {
   });
 });
 
-startForm.addEventListener("click", selectQuestionAmount);
+startForm.addEventListener("submit", selectQuestionAmount);
