@@ -33,6 +33,11 @@ const wrongFormat = [];
 
 // Scroll
 
+function showGamePage() {
+  gamePage.hidden = false;
+  countdownPage.hidden = true;
+}
+
 function getRandomNumber(min, max) {
   return Math.floor(Math.random() * (max - min) + min);
 }
@@ -73,7 +78,7 @@ function createEquations() {
     wrongFormat[0] = `${firstNumber} x ${secondNumber + 1} = ${equationValue}`;
     wrongFormat[1] = `${firstNumber} x ${secondNumber} = ${equationValue - 1}`;
     wrongFormat[2] = `${firstNumber + 1} x ${secondNumber} = ${equationValue}`;
-    const formatChoice = getRandomNumber(0, 4);
+    const formatChoice = getRandomNumber(1, 3);
     const equation = wrongFormat[formatChoice];
     equationObject = { value: equation, evaluated: "false" };
     equationsArray.push(equationObject);
@@ -82,29 +87,26 @@ function createEquations() {
     module.default(equationsArray);
   });
   console.log(equationsArray);
-  equationsToDOM();
 }
 
-// Dynamically adding correct/incorrect equations
-// function populateGamePage() {
-//   // Reset DOM, Set Blank Space Above
-//   itemContainer.textContent = '';
-//   // Spacer
-//   const topSpacer = document.createElement('div');
-//   topSpacer.classList.add('height-240');
-//   // Selected Item
-//   const selectedItem = document.createElement('div');
-//   selectedItem.classList.add('selected-item');
-//   // Append
-//   itemContainer.append(topSpacer, selectedItem);
+function populateGamePage() {
+  itemContainer.textContent = "";
 
-//   // Create Equations, Build Elements in DOM
+  const topSpacer = document.createElement("div");
+  topSpacer.classList.add("height-240");
 
-//   // Set Blank Space Below
-//   const bottomSpacer = document.createElement('div');
-//   bottomSpacer.classList.add('height-500');
-//   itemContainer.appendChild(bottomSpacer);
-// }
+  const selectedItem = document.createElement("div");
+  selectedItem.classList.add("selected-item");
+
+  itemContainer.append(topSpacer, selectedItem);
+
+  createEquations();
+  equationsToDOM();
+
+  const bottomSpacer = document.createElement("div");
+  bottomSpacer.classList.add("height-500");
+  itemContainer.appendChild(bottomSpacer);
+}
 
 function countdownStart() {
   let number = 3;
@@ -123,7 +125,8 @@ function showCountdown() {
   countdownPage.hidden = false;
   splashPage.hidden = true;
   countdownStart();
-  createEquations();
+  populateGamePage();
+  setTimeout(showGamePage, 400);
 }
 
 function getRadioValue() {
