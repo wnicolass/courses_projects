@@ -37,7 +37,7 @@ let timePlayed = 0;
 let baseTime = 0;
 let penaltyTime = 0;
 let finalTime = 0;
-let finalTimeDisplay = "0.0s";
+let finalTimeDisplay = "0.0";
 
 let valueY = 0;
 
@@ -45,7 +45,7 @@ let bestScoreArray;
 
 function bestScoresToDOM() {
   bestScores.forEach((score, idx) => {
-    score.textContent = bestScoreArray[idx].bestScore;
+    score.textContent = `${bestScoreArray[idx].bestScore}s`;
   });
 }
 
@@ -62,6 +62,20 @@ function getSavedBestScores() {
     localStorage.setItem("bestScores", JSON.stringify(bestScoreArray));
   }
   bestScoresToDOM();
+}
+
+function updateBestScore() {
+  bestScoreArray.forEach((score, idx) => {
+    if (+questionAmount === score.questions) {
+      const savedBestScore = +bestScoreArray[idx].bestScore;
+
+      if (savedBestScore === 0 || savedBestScore > finalTime) {
+        bestScoreArray[idx].bestScore = finalTimeDisplay;
+      }
+    }
+  });
+  bestScoresToDOM();
+  localStorage.setItem("bestScores", JSON.stringify(bestScoreArray));
 }
 
 function playAgain() {
@@ -88,6 +102,7 @@ function scoresToDOM() {
   baseTimeEl.textContent = `Base Time: ${baseTime}s`;
   penaltyTimeEl.textContent = `Penalty: +${penaltyTime}s`;
   finalTimeEl.textContent = `${finalTimeDisplay}s`;
+  updateBestScore();
   itemContainer.scrollTo({
     top: 0,
     behavior: "instant",
