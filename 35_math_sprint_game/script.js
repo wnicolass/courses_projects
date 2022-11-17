@@ -226,15 +226,19 @@ function populateGamePage() {
 }
 
 function countdownStart() {
-  countdown.textContent = "";
   let number = 3;
+  countdown.textContent = number;
   const interval = setInterval(() => {
     countdown.textContent = number;
     number--;
 
-    if (number === -1) {
-      clearInterval(interval);
+    if (number === 0) {
       countdown.textContent = "Go!";
+    } else if (number === -1) {
+      showGamePage();
+      clearInterval(interval);
+    } else {
+      countdown.textContent = number;
     }
   }, 1000);
 }
@@ -242,9 +246,8 @@ function countdownStart() {
 function showCountdown() {
   countdownPage.hidden = false;
   splashPage.hidden = true;
-  countdownStart();
   populateGamePage();
-  setTimeout(showGamePage, 5000);
+  countdownStart();
 }
 
 function getRadioValue() {
