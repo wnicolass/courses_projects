@@ -42,6 +42,16 @@ let finalTimeDisplay = "0.0s";
 
 let valueY = 0;
 
+function scoresToDOM() {
+  finalTimeDisplay = finalTime.toFixed(1);
+  baseTime = timePlayed.toFixed(1);
+  penaltyTime = penaltyTime.toFixed(1);
+  baseTimeEl.textContent = `Base Time: ${baseTime}`;
+  penaltyTimeEl.textContent = `Penalty: +${penaltyTime}s`;
+  finalTimeEl.textContent = `${finalTimeDisplay}s`;
+  showScorePage();
+}
+
 function checkScore() {
   equationsArray.forEach((equation, idx) => {
     if (equation.evaluated !== playerGuessArray[idx]) {
@@ -50,6 +60,7 @@ function checkScore() {
   });
   finalTime = timePlayed + penaltyTime;
   console.log("time", timePlayed, "penalty", penaltyTime, "final", finalTime);
+  scoresToDOM();
 }
 
 function checkTime() {
