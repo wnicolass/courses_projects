@@ -1,3 +1,5 @@
+import shuffleArray from "./shuffle.js";
+
 // Pages
 const gamePage = document.getElementById("game-page");
 const scorePage = document.getElementById("score-page");
@@ -38,8 +40,25 @@ let penaltyTime = 0;
 let finalTime = 0;
 let finalTimeDisplay = "0.0s";
 
-// Scroll
 let valueY = 0;
+
+function checkScore() {
+  equationsArray.forEach((equation, idx) => {
+    if (equation.evaluated !== playerGuessArray[idx]) {
+      penaltyTime += 0.5;
+    }
+  });
+  finalTime = timePlayed + penaltyTime;
+  console.log("time", timePlayed, "penalty", penaltyTime, "final", finalTime);
+}
+
+function checkTime() {
+  if (playerGuessArray.length === questionAmount) {
+    console.log("player guess array:", playerGuessArray);
+    clearInterval(timer);
+    checkScore();
+  }
+}
 
 function addTime() {
   timePlayed += 0.1;
@@ -55,7 +74,6 @@ function startTimer() {
 }
 
 function select(guessedTrue) {
-  console.log("player guess array:", playerGuessArray);
   valueY += 80;
   itemContainer.scroll(0, valueY);
 
@@ -63,6 +81,7 @@ function select(guessedTrue) {
     ? playerGuessArray.push(true)
     : playerGuessArray.push(false);
 }
+window.select = select;
 
 function showGamePage() {
   gamePage.hidden = false;
@@ -98,7 +117,7 @@ function createEquations() {
     secondNumber = getRandomNumber(1, 9);
     const equationValue = firstNumber * secondNumber;
     const equation = `${firstNumber} x ${secondNumber} = ${equationValue}`;
-    equationObject = { value: equation, evaluated: "true" };
+    equationObject = { value: equation, evaluated: true };
     equationsArray.push(equationObject);
   }
 
@@ -111,13 +130,11 @@ function createEquations() {
     wrongFormat[2] = `${firstNumber + 1} x ${secondNumber} = ${equationValue}`;
     const formatChoice = getRandomNumber(1, 3);
     const equation = wrongFormat[formatChoice];
-    equationObject = { value: equation, evaluated: "false" };
+    equationObject = { value: equation, evaluated: false };
     equationsArray.push(equationObject);
   }
-  import("./shuffle.js").then((module) => {
-    module.default(equationsArray);
-  });
   console.log(equationsArray);
+  shuffleArray(equationsArray);
 }
 
 function populateGamePage() {
@@ -172,7 +189,7 @@ function getRadioValue() {
 
 function selectQuestionAmount(e) {
   e.preventDefault();
-  questionAmount = getRadioValue();
+  questionAmount = +getRadioValue();
   console.log(questionAmount);
   if (questionAmount) {
     showCountdown();
