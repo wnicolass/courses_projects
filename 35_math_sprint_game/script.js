@@ -43,6 +43,12 @@ let valueY = 0;
 
 let bestScoreArray;
 
+function bestScoresToDOM() {
+  bestScores.forEach((score, idx) => {
+    score.textContent = bestScoreArray[idx].bestScore;
+  });
+}
+
 function getSavedBestScores() {
   if (localStorage.getItem("bestScores")) {
     bestScoreArray = JSON.parse(localStorage.bestScores);
@@ -55,6 +61,7 @@ function getSavedBestScores() {
     ];
     localStorage.setItem("bestScores", JSON.stringify(bestScoreArray));
   }
+  bestScoresToDOM();
 }
 
 function playAgain() {
