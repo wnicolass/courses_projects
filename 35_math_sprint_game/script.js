@@ -21,7 +21,6 @@ const penaltyTimeEl = document.querySelector(".penalty-time");
 const playAgainBtn = document.querySelector(".play-again");
 
 // Equations
-
 let questionAmount = 0;
 let equationsArray = [];
 let playerGuessArray = [];
@@ -41,6 +40,22 @@ let finalTime = 0;
 let finalTimeDisplay = "0.0s";
 
 let valueY = 0;
+
+let bestScoreArray;
+
+function getSavedBestScores() {
+  if (localStorage.getItem("bestScores")) {
+    bestScoreArray = JSON.parse(localStorage.bestScores);
+  } else {
+    bestScoreArray = [
+      { questions: 10, bestScore: finalTimeDisplay },
+      { questions: 25, bestScore: finalTimeDisplay },
+      { questions: 50, bestScore: finalTimeDisplay },
+      { questions: 99, bestScore: finalTimeDisplay },
+    ];
+    localStorage.setItem("bestScores", JSON.stringify(bestScoreArray));
+  }
+}
 
 function playAgain() {
   gamePage.addEventListener("click", startTimer);
@@ -239,3 +254,5 @@ startForm.addEventListener("click", () => {
 
 startForm.addEventListener("submit", selectQuestionAmount);
 gamePage.addEventListener("click", startTimer);
+
+getSavedBestScores();
