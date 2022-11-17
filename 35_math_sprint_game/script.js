@@ -226,6 +226,7 @@ function populateGamePage() {
 }
 
 function countdownStart() {
+  countdown.textContent = "";
   let number = 3;
   const interval = setInterval(() => {
     countdown.textContent = number;
