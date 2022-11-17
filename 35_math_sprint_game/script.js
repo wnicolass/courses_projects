@@ -42,13 +42,34 @@ let finalTimeDisplay = "0.0s";
 
 let valueY = 0;
 
+function playAgain() {
+  gamePage.addEventListener("click", startTimer);
+  scorePage.hidden = true;
+  splashPage.hidden = false;
+  equationsArray = [];
+  playerGuessArray = [];
+  valueY = 0;
+  playAgain.hidden = true;
+}
+window.playAgain = playAgain;
+
+function showScorePage() {
+  setTimeout(() => (playAgainBtn.hidden = false), 1000);
+  gamePage.hidden = true;
+  scorePage.hidden = false;
+}
+
 function scoresToDOM() {
   finalTimeDisplay = finalTime.toFixed(1);
   baseTime = timePlayed.toFixed(1);
   penaltyTime = penaltyTime.toFixed(1);
-  baseTimeEl.textContent = `Base Time: ${baseTime}`;
+  baseTimeEl.textContent = `Base Time: ${baseTime}s`;
   penaltyTimeEl.textContent = `Penalty: +${penaltyTime}s`;
   finalTimeEl.textContent = `${finalTimeDisplay}s`;
+  itemContainer.scrollTo({
+    top: 0,
+    behavior: "instant",
+  });
   showScorePage();
 }
 
