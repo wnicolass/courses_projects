@@ -99,9 +99,13 @@ function dragEnter(column) {
   currentColumn = column;
 }
 
+function dragLeave(e) {
+  console.log("disparei drag leave on", e.target);
+  e.target.classList.remove("over");
+}
+
 function drop(e) {
   e.preventDefault();
-  listColumns.forEach((column) => column.classList.remove("over"));
   const parentEl = listColumns[currentColumn];
   parentEl.appendChild(draggedItem);
 }
