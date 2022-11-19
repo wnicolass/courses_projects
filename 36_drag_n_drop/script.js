@@ -88,6 +88,31 @@ function updateDOM() {
   updateSavedColumns();
 }
 
+function addToColumn(column) {
+  const itemText = addItems[column].textContent;
+  if (itemText.trim() !== "") {
+    const selectedArray = listArrays[column];
+    selectedArray.push(itemText);
+    addItems[column].textContent = "";
+    updateDOM();
+  } else {
+    alert("Please insert text");
+  }
+}
+
+function showInputBox(column) {
+  addBtns[column].style.visibility = "hidden";
+  saveItemBtns[column].style.display = "flex";
+  addItemContainers[column].style.display = "flex";
+}
+
+function hideInputBox(column) {
+  addBtns[column].style.visibility = "visible";
+  saveItemBtns[column].style.display = "none";
+  addItemContainers[column].style.display = "none";
+  addToColumn(column);
+}
+
 function rebuildArrays() {
   backlogListArray = [];
   for (let i = 0; i < backlogList.children.length; i++) {
