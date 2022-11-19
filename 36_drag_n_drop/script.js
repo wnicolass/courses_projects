@@ -46,8 +46,10 @@ function updateSavedColumns() {
     completeListArray,
     onHoldListArray,
   ];
+
   const arrayNames = ["backlog", "progress", "complete", "onHold"];
   listArrays.forEach((list, idx) => {
+    list = list.filter((item) => item !== null);
     localStorage.setItem(`${arrayNames[idx]}Items`, JSON.stringify(list));
   });
 }
@@ -58,6 +60,9 @@ function createItemEl(columnEl, column, item, index) {
   listEl.textContent = item;
   listEl.draggable = true;
   listEl.setAttribute("ondragstart", "drag(event)");
+  listEl.contentEditable = true;
+  listEl.id = index;
+  listEl.setAttribute("onfocusout", `updateItem(${index}, ${column})`);
 
   columnEl.appendChild(listEl);
 }
@@ -80,12 +85,21 @@ function updateDOM() {
 
   for (let i = 0; i < listArrays.length; i++) {
     listArrays[i].forEach((item, idx) => {
-      createItemEl(listColumns[i], 0, item, idx);
+      createItemEl(listColumns[i], i, item, idx);
     });
   }
 
   updatedOnLoad = true;
   updateSavedColumns();
+}
+
+function updateItem(id, column) {
+  const selectedArray = listArrays[column];
+  const selectedColumnEl = listColumns[column].children;
+  if (!selectedColumnEl[id].textContent) {
+    delete selectedArray[id];
+  }
+  updateDOM();
 }
 
 function addToColumn(column) {
