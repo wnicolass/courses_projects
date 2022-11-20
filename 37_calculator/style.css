@@ -21,6 +21,7 @@ body {
   box-shadow: 0 5px 30px -5px rgba(0, 0, 0, 0.6);
 }
 
+/* Display */
 .calculator-display {
   background-color: #000;
   color: #fff;
@@ -43,4 +44,21 @@ body {
   font-weight: 100;
 
   overflow-x: auto;
+}
+
+/* Scrollbar */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #888;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
 }
