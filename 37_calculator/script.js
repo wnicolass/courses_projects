@@ -1,6 +1,6 @@
 const calculatorDisplay = document.querySelector("h1");
 const inputBtns = document.querySelectorAll("button");
-const clearBtn = document.getElementById("clear-btn");
+const clearBtn = document.getElementById("clear");
 
 function sendNumberValue(number) {
   const displayValue = calculatorDisplay.textContent;
@@ -17,3 +17,9 @@ inputBtns.forEach((btn) => {
     btn.addEventListener("click", () => sendNumberValue(btn.value));
   }
 });
+
+function resetAll() {
+  calculatorDisplay.textContent = "0";
+}
+
+clearBtn.addEventListener("click", resetAll);
