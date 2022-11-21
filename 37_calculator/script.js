@@ -8,13 +8,19 @@ function sendNumberValue(number) {
     displayValue === "0" ? number : displayValue + number;
 }
 
+function addDecimal() {
+  if (!calculatorDisplay.textContent.includes(".")) {
+    calculatorDisplay.textContent = `${calculatorDisplay.textContent}.`;
+  }
+}
+
 inputBtns.forEach((btn) => {
   if (btn.classList.length === 0) {
     btn.addEventListener("click", () => sendNumberValue(btn.value));
   } else if (btn.classList.contains("operator")) {
     btn.addEventListener("click", () => sendNumberValue(btn.value));
   } else if (btn.classList.contains("decimal")) {
-    btn.addEventListener("click", () => sendNumberValue(btn.value));
+    btn.addEventListener("click", addDecimal);
   }
 });
 
