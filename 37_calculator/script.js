@@ -28,17 +28,19 @@ function addDecimal() {
 }
 
 function useOperator(operator) {
+  if (operatorValue && awaitingNextValue) {
+    return;
+  }
+
   const currentValue = +calculatorDisplay.textContent;
+
   if (!firstValue) {
     firstValue = currentValue;
   } else {
-    console.log("current value", currentValue);
+    console.log(firstValue, operatorValue, currentValue);
   }
   awaitingNextValue = true;
   operatorValue = operator;
-
-  console.log("first value", firstValue);
-  console.log("operator", operatorValue);
 }
 
 inputBtns.forEach((btn) => {
