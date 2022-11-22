@@ -1,4 +1,8 @@
+@import url("https://fonts.googleapis.com/css2?family=Lato&display=swap");
 
+:root {
+  font-size: 62.5%;
+}
 
 html {
   box-sizing: border-box;
@@ -6,4 +10,22 @@ html {
 
 body {
   margin: 0;
+  background: linear-gradient(
+    180deg,
+    #ffffff 0%,
+    #f3f8f7 49.91%,
+    #fff9f5 94.19%
+  );
+
+  font-family: "Lato", sans-serif;
+  font-size: 1.6rem;
+}
+
+.wrapper {
+  position: relative;
+  width: 144rem;
+
+  min-height: 100vh;
+
+  margin: auto;
 }
