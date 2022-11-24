@@ -25,14 +25,15 @@ let isEraser = false;
 // let drawnArray = [];
 
 // Formatting Brush Size
-// function displayBrushSize() {
-
-// }
+function displayBrushSize() {
+  brushSize.textContent = currentSize < 10 ? `0${currentSize}` : currentSize;
+}
 
 // Setting Brush Size
-// brushSlider.addEventListener('change', () => {
-
-// });
+brushSlider.addEventListener("change", () => {
+  currentSize = brushSlider.value;
+  displayBrushSize();
+});
 
 // Setting Brush Color
 brushColorBtn.addEventListener("change", () => {
@@ -73,6 +74,7 @@ function createCanvas() {
   context.fillStyle = bucketColor;
   context.fillRect(0, 0, canvas.width, canvas.height);
   body.appendChild(canvas);
+  switchToBrush();
 }
 
 // // Clear Canvas
