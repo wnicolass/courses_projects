@@ -1,3 +1,4 @@
+const BRUSH_DELAY = 1500;
 const activeToolEl = document.getElementById("active-tool");
 const brushColorBtn = document.getElementById("brush-color");
 const brushIcon = document.getElementById("brush");
@@ -86,7 +87,7 @@ clearCanvasBtn.addEventListener("click", () => {
   drawnArray = [];
   // Active Tool
   activeToolEl.textContent = "Canvas Cleared";
-  setTimeout(switchToBrush, 1500);
+  setTimeout(switchToBrush, BRUSH_DELAY);
 });
 
 // Draw what is stored in DrawnArray
@@ -170,7 +171,7 @@ saveStorageBtn.addEventListener("click", () => {
   localStorage.setItem("savedCanvas", JSON.stringify(drawnArray));
   // Active Tool
   activeToolEl.textContent = "Canvas Saved";
-  setTimeout(switchToBrush, 1500);
+  setTimeout(switchToBrush, BRUSH_DELAY);
 });
 
 // Load from Local Storage
@@ -182,7 +183,7 @@ loadStorageBtn.addEventListener("click", () => {
     // Active Tool
   } else {
     activeToolEl.textContent = "No canvas found";
-    setTimeout(switchToBrush, 1500);
+    setTimeout(switchToBrush, BRUSH_DELAY);
   }
 });
 
@@ -193,7 +194,7 @@ clearStorageBtn.addEventListener("click", () => {
     : false;
   // Active Tool
   activeToolEl.textContent = "Local Storage Cleared";
-  setTimeout(switchToBrush, 1500);
+  setTimeout(switchToBrush, BRUSH_DELAY);
 });
 
 // Download Image
@@ -202,7 +203,7 @@ downloadBtn.addEventListener("click", () => {
   downloadBtn.download = "paint.jpeg";
   // Active Tool
   activeToolEl.textContent = "Image File Saved";
-  setTimeout(switchToBrush, 1500);
+  setTimeout(switchToBrush, BRUSH_DELAY);
 });
 
 // Event Listener
