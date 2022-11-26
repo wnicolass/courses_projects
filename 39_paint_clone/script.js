@@ -180,7 +180,8 @@ loadStorageBtn.addEventListener("click", () => {
     console.log(drawnArray);
     restoreCanvas();
     // Active Tool
-    activeToolEl.textContent = "Canvas Loaded";
+  } else {
+    activeToolEl.textContent = "No canvas found";
     setTimeout(switchToBrush, 1500);
   }
 });
