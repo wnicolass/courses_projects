@@ -30,35 +30,6 @@ function displayBrushSize() {
   brushSize.textContent = currentSize < 10 ? `0${currentSize}` : currentSize;
 }
 
-// Setting Brush Size
-brushSlider.addEventListener("change", () => {
-  currentSize = brushSlider.value;
-  displayBrushSize();
-});
-
-// Setting Brush Color
-brushColorBtn.addEventListener("change", () => {
-  isEraser = false;
-  currentColor = `#${brushColorBtn.value}`;
-});
-
-// Setting Background Color
-bucketColorBtn.addEventListener("change", () => {
-  bucketColor = `#${bucketColorBtn.value}`;
-  createCanvas();
-  restoreCanvas();
-});
-
-// Eraser
-eraser.addEventListener("click", () => {
-  isEraser = true;
-  brushIcon.style.color = "white";
-  eraser.style.color = "black";
-  activeToolEl.textContent = "Eraser";
-  currentColor = bucketColor;
-  currentSize = 50;
-});
-
 // Switch back to Brush
 function switchToBrush() {
   isEraser = false;
@@ -84,15 +55,6 @@ function createCanvas() {
   body.appendChild(canvas);
   switchToBrush(BRUSH_DELAY);
 }
-
-// Clear Canvas
-clearCanvasBtn.addEventListener("click", () => {
-  createCanvas();
-  drawnArray = [];
-  // Active Tool
-  activeToolEl.textContent = "Canvas Cleared";
-  setBrushTime(BRUSH_DELAY);
-});
 
 // Draw what is stored in DrawnArray
 function restoreCanvas() {
@@ -164,6 +126,44 @@ canvas.addEventListener("mousemove", (event) => {
 // Mouse Up
 canvas.addEventListener("mouseup", () => {
   isMouseDown = false;
+});
+
+// Setting Brush Size
+brushSlider.addEventListener("change", () => {
+  currentSize = brushSlider.value;
+  displayBrushSize();
+});
+
+// Setting Brush Color
+brushColorBtn.addEventListener("change", () => {
+  isEraser = false;
+  currentColor = `#${brushColorBtn.value}`;
+});
+
+// Setting Background Color
+bucketColorBtn.addEventListener("change", () => {
+  bucketColor = `#${bucketColorBtn.value}`;
+  createCanvas();
+  restoreCanvas();
+});
+
+// Eraser
+eraser.addEventListener("click", () => {
+  isEraser = true;
+  brushIcon.style.color = "white";
+  eraser.style.color = "black";
+  activeToolEl.textContent = "Eraser";
+  currentColor = bucketColor;
+  currentSize = 50;
+});
+
+// Clear Canvas
+clearCanvasBtn.addEventListener("click", () => {
+  createCanvas();
+  drawnArray = [];
+  // Active Tool
+  activeToolEl.textContent = "Canvas Cleared";
+  setBrushTime(BRUSH_DELAY);
 });
 
 // Save to Local Storage
