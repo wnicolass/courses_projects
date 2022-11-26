@@ -120,7 +120,6 @@ function storeDrawn(x, y, size, color, erase) {
     color,
     erase,
   };
-  console.log(line);
   drawnArray.push(line);
 }
 
@@ -137,7 +136,6 @@ function getMousePosition(event) {
 canvas.addEventListener("mousedown", (event) => {
   isMouseDown = true;
   const currentPosition = getMousePosition(event);
-  console.log("mouse is clicked", currentPosition);
   context.moveTo(currentPosition.x, currentPosition.y);
   context.beginPath();
   context.lineWidth = currentSize;
@@ -149,7 +147,6 @@ canvas.addEventListener("mousedown", (event) => {
 canvas.addEventListener("mousemove", (event) => {
   if (isMouseDown) {
     const currentPosition = getMousePosition(event);
-    console.log("mouse is moving", currentPosition);
     context.lineTo(currentPosition.x, currentPosition.y);
     context.stroke();
     storeDrawn(
@@ -167,7 +164,6 @@ canvas.addEventListener("mousemove", (event) => {
 // Mouse Up
 canvas.addEventListener("mouseup", () => {
   isMouseDown = false;
-  console.log("mouse is unclicked");
 });
 
 // Save to Local Storage
