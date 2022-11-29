@@ -171,18 +171,21 @@ function computerAI() {
 }
 
 function showGameOverEl(winner) {
-  // Hide Canvas
-  // // Container
-  // gameOverEl.textContent = '';
-  // gameOverEl.classList.add('game-over-container');
-  // // Title
-  // const title = document.createElement('h1');
-  // title.textContent = `${winner} Wins!`;
-  // // Button
-  // const playAgainBtn = document.createElement('button');
-  // playAgainBtn.setAttribute('onclick', 'startGame()');
-  // playAgainBtn.textContent = 'Play Again';
-  // // Append
+  //Hide Canvas
+  canvas.hidden = true;
+  // Container
+  gameOverEl.textContent = "";
+  gameOverEl.classList.add("game-over-container");
+  // Title
+  const title = document.createElement("h1");
+  title.textContent = `${winner} Wins!`;
+  // Button
+  const playAgainBtn = document.createElement("button");
+  playAgainBtn.setAttribute("onclick", "startGame()");
+  playAgainBtn.textContent = "Play Again";
+  // Append
+  gameOverEl.append(title, playAgainBtn);
+  body.appendChild(gameOverEl);
 }
 
 // Check If One Player Has Winning Score, If They Do, End Game
@@ -207,11 +210,12 @@ function animate() {
 
 // Start Game, Reset Everything
 function startGame() {
-  // if (isGameOver && !isNewGame) {
-
-  // }
-  // isGameOver = ;
-  // isNewGame = ;
+  if (isGameOver && !isNewGame) {
+    body.removeChild(gameOverEl);
+    canvas.hidden = false;
+  }
+  isGameOver = false;
+  isNewGame = false;
   playerScore = 0;
   computerScore = 0;
   ballReset();
