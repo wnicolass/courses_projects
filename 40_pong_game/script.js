@@ -62,12 +62,12 @@ function renderCanvas() {
   context.fillRect(paddleTopX, 10, paddleWidth, paddleHeight);
 
   // Dashed Center Line
-  // context.beginPath();
-  // context.setLineDash([4]);
-  // context.moveTo(0, 350);
-  // context.lineTo(500, 350);
-  // context.strokeStyle = 'grey';
-  // context.stroke();
+  context.beginPath();
+  context.setLineDash([4]);
+  context.moveTo(0, 350);
+  context.lineTo(500, 350);
+  context.strokeStyle = "grey";
+  context.stroke();
 
   // Ball
   // context.beginPath();
