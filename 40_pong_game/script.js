@@ -54,13 +54,13 @@ function renderCanvas() {
   context.fillRect(0, 0, width, height);
 
   // Paddle Color
-  // context.fillStyle = 'white';
+  context.fillStyle = "white";
 
   // Player Paddle (Bottom)
-  // context.fillRect(paddleBottomX, height - 20, paddleWidth, paddleHeight);
+  context.fillRect(paddleBottomX, height - 20, paddleWidth, paddleHeight);
   // Computer Paddle (Top)
+  context.fillRect(paddleTopX, 10, paddleWidth, paddleHeight);
 
-  // context.fillRect(paddleTopX, 10, paddleWidth, paddleHeight);
   // Dashed Center Line
   // context.beginPath();
   // context.setLineDash([4]);
